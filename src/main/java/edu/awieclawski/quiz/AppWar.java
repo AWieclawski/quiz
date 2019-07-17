@@ -2,13 +2,19 @@ package edu.awieclawski.quiz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-// Enables self executing war package 
 @SpringBootApplication
-public class AppWar {
+public class AppWar extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-        SpringApplication.run(AppWar.class, args);
-    }
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(AppWar.class);
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(AppWar.class, args);
+	}
 
 }
