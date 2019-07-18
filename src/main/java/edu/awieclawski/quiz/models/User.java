@@ -1,6 +1,8 @@
 package edu.awieclawski.quiz.models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,8 +21,12 @@ public class User {
     private String login;
     @JsonIgnore
     private String password;
-    private String privilege;
-    private String status;
+    @JsonIgnore
+    @Enumerated(EnumType.STRING)
+    private Privileges privilege;
+    @Enumerated(EnumType.STRING)
+    private Statuses status;
+    
 	public Long getUserId() {
 		return userId;
 	}
@@ -45,16 +51,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPrivilege() {
+	public Privileges getPrivilege() {
 		return privilege;
 	}
-	public void setPrivilege(String privilege) {
+	public void setPrivilege(Privileges privilege) {
 		this.privilege = privilege;
 	}
-	public String getStatus() {
+	public Statuses getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Statuses status) {
 		this.status = status;
 	}
 	

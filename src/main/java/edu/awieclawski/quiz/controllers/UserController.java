@@ -7,23 +7,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.awieclawski.quiz.models.Privileges;
+import edu.awieclawski.quiz.models.Statuses;
 import edu.awieclawski.quiz.models.User;
 import edu.awieclawski.quiz.repositories.UserRepository;
 
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping(path = "/user")
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping(path = "/add_user")
+	@GetMapping(path = "/add")
 	public @ResponseBody String addNewUser(
 			@RequestParam String userName, 
 			@RequestParam String login,
 			@RequestParam String password, 
-			@RequestParam String privilege, 
-			@RequestParam String status
+			@RequestParam Privileges privilege, 
+			@RequestParam Statuses status
 	) {
 
 		User n = new User();
@@ -34,10 +36,10 @@ public class UserController {
 		n.setStatus(status);
 		userRepository.save(n);
 
-		return userName.concat(" saved\n");
+		return userName.concat(" saved. OK\n");
 	}
 
-	@GetMapping(path = "/all_users")
+	@GetMapping(path = "/all")
 	public @ResponseBody Iterable<User> getAllUsers() {
 		return userRepository.findAll();
 	}
