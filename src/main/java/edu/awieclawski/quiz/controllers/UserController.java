@@ -23,7 +23,8 @@ public class UserController {
 	public @ResponseBody String addNewUser(
 			@RequestParam String userName, 
 			@RequestParam String login,
-			@RequestParam String password, 
+			@RequestParam String password,
+			//API does not know the hard coded constants placed in db, only keys in enums fields
 			@RequestParam int privilege, 
 			@RequestParam int status
 	) {
@@ -32,8 +33,8 @@ public class UserController {
 		u.setUserName(userName);
 		u.setLogin(login);
 		u.setPassword(password);
-		u.setPrivilege(Privileges.valueOf(privilege));
-		u.setStatus(Statuses.valueOf(status));
+		u.setPrivilege(Privileges.valueOf(privilege)); 
+		u.setStatus(Statuses.valueOf(status)); 
 		userRepository.save(u);
 
 		return userName.concat(" saved. OK\n");

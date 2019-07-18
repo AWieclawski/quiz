@@ -1,9 +1,12 @@
 package edu.awieclawski.quiz.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Privileges {
 	RULER(0, "admin"), EXPLOITER(1, "user");
 
 	private final int privilegeKey;
+	@JsonValue // just in case someone turns on this enum for JSON
 	private final String privilegeName;
 
 	private Privileges(int key, String name) {
