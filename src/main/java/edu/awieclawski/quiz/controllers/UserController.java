@@ -24,7 +24,7 @@ public class UserController {
 			@RequestParam String userName, 
 			@RequestParam String login,
 			@RequestParam String password, 
-			@RequestParam Privileges privilege, 
+			@RequestParam int privilege, 
 			@RequestParam Statuses status
 	) {
 
@@ -32,7 +32,7 @@ public class UserController {
 		n.setUserName(userName);
 		n.setLogin(login);
 		n.setPassword(password);
-		n.setPrivilege(privilege);
+		n.setPrivilege(Privileges.valueOf(privilege));
 		n.setStatus(status);
 		userRepository.save(n);
 
