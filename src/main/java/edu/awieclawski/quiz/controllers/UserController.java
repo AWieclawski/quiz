@@ -25,16 +25,16 @@ public class UserController {
 			@RequestParam String login,
 			@RequestParam String password, 
 			@RequestParam int privilege, 
-			@RequestParam Statuses status
+			@RequestParam int status
 	) {
 
-		User n = new User();
-		n.setUserName(userName);
-		n.setLogin(login);
-		n.setPassword(password);
-		n.setPrivilege(Privileges.valueOf(privilege));
-		n.setStatus(status);
-		userRepository.save(n);
+		User u = new User();
+		u.setUserName(userName);
+		u.setLogin(login);
+		u.setPassword(password);
+		u.setPrivilege(Privileges.valueOf(privilege));
+		u.setStatus(Statuses.valueOf(status));
+		userRepository.save(u);
 
 		return userName.concat(" saved. OK\n");
 	}

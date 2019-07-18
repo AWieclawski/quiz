@@ -19,9 +19,9 @@ public enum Privileges {
 	public String toString() {
 		return this.privilegeName;
 	}
-	
-    public static Privileges valueOf(int digit) {
-        return digit == 0 ? RULER : EXPLOITER;
-    }
+
+	public static Privileges valueOf(int digit) {
+		return digit == 0 ? RULER : EXPLOITER;
+	}
 
 }
