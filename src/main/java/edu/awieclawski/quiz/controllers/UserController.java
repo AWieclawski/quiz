@@ -1,5 +1,6 @@
 package edu.awieclawski.quiz.controllers;
 
+import org.hibernate.boot.archive.internal.ExplodedArchiveDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,21 +21,18 @@ public class UserController {
 	private UserRepository userRepository;
 
 	@GetMapping(path = "/add")
-	public @ResponseBody String addNewUser(
-			@RequestParam String userName, 
-			@RequestParam String login,
+	public @ResponseBody String addNewUser(@RequestParam String userName, @RequestParam String login,
 			@RequestParam String password,
-			//API does not know the hard coded constants placed in db, only keys in enums fields
-			@RequestParam int privilege, 
-			@RequestParam int status
-	) {
-
+			// API doesn't know the hard coded enum constants in code & db,
+			// only their keys in fields
+			@RequestParam int privilege, @RequestParam int status) {
+		privilege = Privileges.EXPLOITER.privilegeKey();// API always establishes not admin privilege
 		User u = new User();
 		u.setUserName(userName);
 		u.setLogin(login);
 		u.setPassword(password);
-		u.setPrivilege(Privileges.valueOf(privilege)); 
-		u.setStatus(Statuses.valueOf(status)); 
+		u.setPrivilege(Privileges.valueOf(privilege));
+		u.setStatus(Statuses.valueOf(status));
 		userRepository.save(u);
 
 		return userName.concat(" saved. OK\n");
