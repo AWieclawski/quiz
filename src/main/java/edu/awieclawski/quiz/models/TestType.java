@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "testtypes_tb")
-
 public class TestType {
 
 	@Id
@@ -27,5 +26,4 @@ public class TestType {
 	public void setTestTypeName(String testTypeName) {
 		this.testTypeName = testTypeName;
 	}
-
 }

@@ -21,13 +21,14 @@ public class TestTypeController {
 	public @ResponseBody String addNewTestType(@RequestParam String testTypeName) {
 		TestType tt = new TestType();
 		tt.setTestTypeName(testTypeName);
+		testTypeRepository.save(tt);
+		
 		return testTypeName.concat(" saved. OK\n");
 	}
 
 	@GetMapping (path="/all")
 	public @ResponseBody Iterable<TestType> getAllTestTypes(){
 		return testTypeRepository.findAll();
-		
 	}
 	
 }
