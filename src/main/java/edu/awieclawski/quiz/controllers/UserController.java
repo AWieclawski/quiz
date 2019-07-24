@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.awieclawski.quiz.models.Privileges;
-import edu.awieclawski.quiz.models.Statuses;
 import edu.awieclawski.quiz.models.User;
+import edu.awieclawski.quiz.models.enums.Privileges;
+import edu.awieclawski.quiz.models.enums.Statuses;
 import edu.awieclawski.quiz.repositories.UserRepository;
 
 @Controller

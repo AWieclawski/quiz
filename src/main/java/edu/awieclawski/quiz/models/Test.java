@@ -2,6 +2,8 @@ package edu.awieclawski.quiz.models;
 
 import javax.persistence.*;
 
+import edu.awieclawski.quiz.models.enums.Statuses;
+
 @Entity
 @Table(name = "test_tb")
 public class Test {

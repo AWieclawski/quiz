@@ -1,7 +1,6 @@
 package edu.awieclawski.quiz.models;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

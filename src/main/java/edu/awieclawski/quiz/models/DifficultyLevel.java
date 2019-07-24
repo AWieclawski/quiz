@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "difflevels_tb")
-
 public class DifficultyLevel {
 
 	@Id

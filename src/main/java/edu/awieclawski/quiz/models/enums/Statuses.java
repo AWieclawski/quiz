@@ -1,9 +1,9 @@
-package edu.awieclawski.quiz.models;
+package edu.awieclawski.quiz.models.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Statuses {
-	ACTIVE(1, "active"), EXCLUDED(0, "inactive");
+	ACTIVATED(1, "active"), EXCLUDED(0, "inactive");
 
 	private final int statusKey;
 	@JsonValue
@@ -24,7 +24,7 @@ public enum Statuses {
 	}
 
 	public static Statuses valueOf(int digit) {
-		return digit == 0 ? EXCLUDED : ACTIVE;
+		return digit == 0 ? EXCLUDED : ACTIVATED;
 	}
 
 }

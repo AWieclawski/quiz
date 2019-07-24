@@ -1,4 +1,4 @@
-package edu.awieclawski.quiz.models;
+package edu.awieclawski.quiz.models.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

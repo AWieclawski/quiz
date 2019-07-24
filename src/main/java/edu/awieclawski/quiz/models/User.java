@@ -1,14 +1,9 @@
 package edu.awieclawski.quiz.models;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.awieclawski.quiz.models.enums.Privileges;
+import edu.awieclawski.quiz.models.enums.Statuses;
 
 @Entity
 @Table(name = "users_tb")
