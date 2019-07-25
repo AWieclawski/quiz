@@ -3,6 +3,6 @@
 
 <div class="menu">
 
-    <a href="/quiz-web/welcome"><img src="/img/quiz.png" height="50" alt="quiz"></a>
+    <a href="/welcome"><img src="/img/quiz.png" height="50" alt="quiz"></a>
 
 </div>

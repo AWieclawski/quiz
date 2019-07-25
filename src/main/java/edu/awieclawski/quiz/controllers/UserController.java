@@ -23,7 +23,7 @@ public class UserController {
 	public @ResponseBody String addNewUser(@RequestParam String userName, @RequestParam String login,
 			@RequestParam String password,
 			// API doesn't know the hard coded enum constants in code & db,
-			// only their keys in fields
+			// only find their keys from fields
 			@RequestParam int privilege, @RequestParam int status) {
 		privilege = Privileges.EXPLOITER.privilegeKey();// API always establishes not admin privilege
 		User u = new User();
