@@ -24,18 +24,17 @@ body {
 }
 
 #left {
-	width: 30%;
+	width: 25%;
 	float: left;
 	text-align: left;
 	height: 400px;
-		background-color: #444444;
-		padding-left: 20px;
-		padding-right: 20px;
-		
+	background-color: #444444;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #right {
-	width: 65%;
+	width: 70%;
 	float: left;
 	text-align: center;
 	height: 400px;
@@ -74,41 +73,50 @@ body {
 }
 
 .menu {
-	margin:0px;
+	margin: 0px;
 }
 
-.menu img{
-		vertical-align: middle;
+.menu img {
+	vertical-align: middle;
 }
 
 .menu ul.button-container {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #555555;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #555555;
 }
 
-.menu ul.button-container li {float: left;}
+.menu ul.button-container li {
+	float: left;
+}
 
 .menu ul.button-container li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 0px 20px;
-  	line-height: 40px;
-  text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 0px 20px;
+	line-height: 40px;
+	text-decoration: none;
 }
 
-.menu ul.button-container li a:hover {background-color: #111111;}
+.menu ul.button-container li a:hover {
+	background-color: #111111;
+}
 
-.menu ul.button-container li a:active {background-color: #222222;}
+.menu ul.button-container li a:active {
+	background-color: #222222;
+}
 
-ul.button-container li.right {float: right;}
+ul.button-container li.right {
+	float: right;
+}
 
 @media screen and (max-width: 600px) {
-  .menu ul.button-container li.right, 
-  .menu ul.button-container li {float: none;}
+	.menu ul.button-container li.right, .menu ul.button-container li {
+		float: none;
+	}
 }
 
 .infobar {

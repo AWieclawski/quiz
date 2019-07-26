@@ -12,25 +12,34 @@
 
 <div id="right">
 
-<h1>Test types:</h1>
+	<h1>Test types:</h1>
 
-	<table>
+	<form action="/quiz/firststep" method="post">
 
-		<thead>
-			<tr>
-				<th></th>
-			</tr>
-		</thead>
+		<table>
 
-		<tbody>
-			<c:forEach items="${testTypes}" var="testType">
+			<thead>
 				<tr>
-					<td><label>${testType.testTypeName} <input
-							type="radio" name="testType_Id" value="${testType.testTypeId}"></label></td>
+					<th colspan="2"></th>
 				</tr>
-			</c:forEach>
-		</tbody>
+			</thead>
 
-	</table>
+			<tbody>
+				<c:forEach items="${testTypes}" var="testType">
+					<tr>
+						<td colspan=2><label>${testType.testTypeName} <input type="radio"
+								name="testType_Id" value="${testType.testTypeId}"></label></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td><input type="submit" value="Confirm&NextStep"></td>
+					<td><input type="reset" value="Reset"></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</form>
+	
 
 </div>

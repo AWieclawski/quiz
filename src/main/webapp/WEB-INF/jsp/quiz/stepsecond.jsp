@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 
 <title>Quiz</title>
-<meta name="description" content="Quiz step I">
+<meta name="description" content="Quiz step II">
 <meta http-equiv="X-Ua-Compatible" content="IE=edge">
 
 <link rel="stylesheet" href="/css/style.css">
@@ -26,7 +26,7 @@
 
 		<div class="content">
 
-			<jsp:include page="../partials/content_02.jsp" />
+			<jsp:include page="../partials/content_03.jsp" />
 
 		</div>
 
