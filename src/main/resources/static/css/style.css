@@ -17,9 +17,9 @@ body {
 }
 
 .content {
-	background-color: #222222;
+	background-color: #333333;
 	color: #bbbbbb;
-	padding: 20px;
+	padding: 0px;
 	height: 400px;
 }
 
@@ -28,10 +28,14 @@ body {
 	float: left;
 	text-align: left;
 	height: 400px;
+		background-color: #444444;
+		padding-left: 20px;
+		padding-right: 20px;
+		
 }
 
 #right {
-	width: 70%;
+	width: 65%;
 	float: left;
 	text-align: center;
 	height: 400px;
@@ -43,11 +47,12 @@ body {
 }
 
 #right table {
-	margin: 20px;
+	margin: 0px;
+	padding-left: 40px;
 }
 
 #right table thead {
-	font-size: 150%;
+	font-size: 100%;
 }
 
 #right table tbody tr:hover {
@@ -56,7 +61,7 @@ body {
 }
 
 .footer {
-	background-color: #777777;
+	background-color: #222222;
 	padding: 10px;
 	text-align: right;
 	color: white;
@@ -64,41 +69,50 @@ body {
 }
 
 .navbar {
-	background-color: #bbbbbb;
 	padding: 0px;
 	margin: 0px;
 }
 
 .menu {
-	padding: 10px;
+	margin:0px;
 }
 
-.logo {
-	margin: 10px;
-	float: left;
+.menu img{
+		vertical-align: middle;
 }
 
-.menu-right {
-	float: left;
-	align-text: center;
+.menu ul.button-container {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #555555;
 }
 
-.menu-right.button-container {
-	margin: 20px 10px;
-	vertical-align: middle;
+.menu ul.button-container li {float: left;}
+
+.menu ul.button-container li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0px 20px;
+  	line-height: 40px;
+  text-decoration: none;
 }
 
-.menu-right.button {
-	padding: 5px;
+.menu ul.button-container li a:hover {background-color: #111111;}
 
-}
+.menu ul.button-container li a:active {background-color: #222222;}
 
-.menu button:hover {
-	color: blue;
+ul.button-container li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  .menu ul.button-container li.right, 
+  .menu ul.button-container li {float: none;}
 }
 
 .infobar {
-	background-color: #dddddd;
+	background-color: #bbbbbb;
 	padding: 5px;
 	color: black;
 }
@@ -123,12 +137,12 @@ p {
 	font-size: 14px;
 }
 
-.in_the_middle {
+.in_the_middle_400 {
 	margin-right: auto;
 	margin-left: auto;
 	line-height: 400px;
 }
 
-.in_the_middle img {
+.in_the_middle_400 img {
 	vertical-align: middle;
 }

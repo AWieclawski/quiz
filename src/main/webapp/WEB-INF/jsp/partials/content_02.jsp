@@ -12,11 +12,13 @@
 
 <div id="right">
 
+<h1>Test types:</h1>
+
 	<table>
 
 		<thead>
 			<tr>
-				<th>Test types:</th>
+				<th></th>
 			</tr>
 		</thead>
 
