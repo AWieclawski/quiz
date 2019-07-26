@@ -1,88 +1,134 @@
+html {
+	background-color: #111111;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    background-color: #eeeeee;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	background-color: #111111;
 }
 
 .container {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    padding: 0px;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	padding: 0px;
 }
 
 .content {
-    background-color: #222222;
-    color: #bbbbbb;
-    padding: 20px;
-    height: 400px;
+	background-color: #222222;
+	color: #bbbbbb;
+	padding: 20px;
+	height: 400px;
 }
 
 #left {
-    width: 35%;
-    float: left;
-    text-align: left;
-    height: 400px;
+	width: 30%;
+	float: left;
+	text-align: left;
+	height: 400px;
 }
 
 #right {
-    width: 65%;
-    float: left;
-    text-align: center;
-    height: 400px;
+	width: 70%;
+	float: left;
+	text-align: center;
+	height: 400px;
+}
+
+#right table th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+#right table {
+	margin: 20px;
+}
+
+#right table thead {
+	font-size: 150%;
+}
+
+#right table tbody tr:hover {
+	background-color: #333333;
+	color: yellow;
 }
 
 .footer {
-    background-color: #777777;
-    padding: 10px;
-    text-align: right;
-    color: white;
-    clear: both;
+	background-color: #777777;
+	padding: 10px;
+	text-align: right;
+	color: white;
+	clear: both;
 }
 
 .navbar {
-    background-color: #bbbbbb;
-    padding: 0px;
-    margin: 0px;
+	background-color: #bbbbbb;
+	padding: 0px;
+	margin: 0px;
 }
 
 .menu {
-    padding: 10px;
+	padding: 10px;
+}
+
+.logo {
+	margin: 10px;
+	float: left;
+}
+
+.menu-right {
+	float: left;
+	align-text: center;
+}
+
+.menu-right.button-container {
+	margin: 20px 10px;
+	vertical-align: middle;
+}
+
+.menu-right.button {
+	padding: 5px;
+
+}
+
+.menu button:hover {
+	color: blue;
 }
 
 .infobar {
-    background-color: #dddddd;
-    padding: 5px;
-    color: black;
+	background-color: #dddddd;
+	padding: 5px;
+	color: black;
 }
 
 .commcell {
-    width: 75%;
-    float: left;
-    text-align: left;
+	width: 75%;
+	float: left;
+	text-align: left;
 }
 
 .logincell {
-    width: 25%;
-    float: left;
-    text-align: right;
+	width: 25%;
+	float: left;
+	text-align: right;
 }
 
 .eraser {
-    clear: both;
+	clear: both;
 }
 
 p {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 .in_the_middle {
-    margin-right: auto;
-    margin-left: auto;
-    line-height: 400px;
+	margin-right: auto;
+	margin-left: auto;
+	line-height: 400px;
 }
 
 .in_the_middle img {
-    vertical-align: middle;
+	vertical-align: middle;
 }

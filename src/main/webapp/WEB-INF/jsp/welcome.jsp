@@ -19,11 +19,7 @@
 
     <div class="navbar">
 
-        <% if (session.getAttribute("user_name") == null) { %>
-        <jsp:include page="partials/logo.jsp"/>
-        <% } else { %>
         <jsp:include page="partials/menu.jsp"/>
-        <% } %>
 
     </div>
 
