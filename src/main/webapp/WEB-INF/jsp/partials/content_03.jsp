@@ -17,7 +17,7 @@
 
 	<h1>Difficulty levels:</h1>
 
-	<form action="/quiz/secondstep" method="post">
+	<form action="/difficultylevel/secondstep" method="post">
 
 		<table>
 

@@ -1,7 +1,10 @@
 package edu.awieclawski.quiz.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +16,8 @@ import edu.awieclawski.quiz.repositories.DifficultyLevelRepository;
 @Controller
 @RequestMapping(path = "/difficultylevel")
 public class DifficultyLevelController {
+	
+	private static final Logger logger = LogManager.getLogger(DifficultyLevelController.class.getName());
 
 	@Autowired
 	DifficultyLevelRepository difficultyLevelRepository;
@@ -29,6 +34,15 @@ public class DifficultyLevelController {
 	@GetMapping(path = "/all")
 	public @ResponseBody Iterable<DifficultyLevel> getAllDifficultyLevels() {
 		return difficultyLevelRepository.findAll();
+	}
+	
+
+	@GetMapping(path = "/secondstep")
+	public String presentDifficultyLevels(Model model) {
+//		logger.debug("presentDifficultyLevels()");
+		logger.info("difficultyLevelRepository count: " + difficultyLevelRepository.count());
+		model.addAttribute("difficultyLevels", difficultyLevelRepository.findAll());
+		return "/quiz/stepsecond";
 	}
 
 }

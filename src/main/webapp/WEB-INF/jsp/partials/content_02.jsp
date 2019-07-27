@@ -14,7 +14,7 @@
 
 	<h1>Test types:</h1>
 
-	<form action="/quiz/firststep" method="post">
+	<form action="/testtype/firststep" method="post">
 
 		<table>
 
