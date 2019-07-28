@@ -24,13 +24,20 @@ body {
 }
 
 #left {
-	width: 25%;
+	width: 30%;
 	float: left;
 	text-align: left;
 	height: 400px;
 	background-color: #444444;
+}
+
+#left .description {
 	padding-left: 20px;
 	padding-right: 20px;
+}
+
+#left strong{
+color: #009999;
 }
 
 #right {
@@ -46,8 +53,9 @@ body {
 }
 
 #right table {
-	margin: 0px;
-	padding-left: 40px;
+	padding: 10px;
+	margin: 0px 20px;
+	width: 90%;
 }
 
 #right table thead {
@@ -55,7 +63,7 @@ body {
 }
 
 #right table tbody tr:hover {
-	background-color: #333333;
+	background-color: #111111;
 	color: yellow;
 }
 

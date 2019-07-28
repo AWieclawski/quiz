@@ -5,46 +5,58 @@
 
 <div id="left">
 
-	<h1>Step two</h1>
-	<h3>Quiz building</h3>
-	<p>Select the difficulty level from among those available in the
-		database.</p>
-	<p>Selected test type: <strong>${TestTypeNameToDisplay}</strong></p>
+	<div class="description">
+
+		<h1>Step Third</h1>
+		<h3>Quiz building</h3>
+		<p>Select the test from among those available in the database.</p>
+		<p>
+			Selected test type: <strong>${selectedTestTypeName}</strong>
+		</p>
+		<p>
+			Selected difficulty level: <strong>${selectedDifficultyLevelName}</strong>
+		</p>
+
+	</div>
 
 </div>
 
 <div id="right">
 
-	<h1>Difficulty levels:</h1>
+	<h1>Tests:</h1>
 
-	<form action="/quiz/secondstep" method="post">
+
+	<form action="/test/thirdstep" method="post">
 
 		<table>
 
-			<thead>
+			<col width="10">
+
+			<!-- 			<thead>
 				<tr>
-					<th colspan="2"></th>
+					<th colspan=2><input type="submit" value="Confirm&NextStep">
+						<input type="reset" value="Reset"></th>
 				</tr>
-			</thead>
+			</thead>	 -->
 
 			<tbody>
-				<c:forEach items="${difficultyLevels}" var="difficultyLevel">
+				<c:forEach items="${tests}" var="test">
 					<tr>
-						<td colspan=2><label>${difficultyLevel.difficultyLevelName}
-								<input type="radio" name="difficultyLevel_Id"
-								value="${difficultyLevel.difficultyLevelId}">
-						</label></td>
+						<td colspan=1><input type="radio" name="test_Id"
+							value="${test.testId}"></td>
+						<td>${test.testName}</td>
 					</tr>
 				</c:forEach>
-				<tr>
-<!--  					<td><input type="submit" value="Confirm&NextStep"></td>
-					<td><input type="reset" value="Reset"></td> 					-->
-				</tr>
+
 			</tbody>
 
 		</table>
 
+		<input type="hidden" name="selectedTestTypeName"
+			value="${selectedTestTypeName}"> <input type="hidden"
+			name="selectedDifficultyLevelName"
+			value="${selectedDifficultyLevelName}">
+
 	</form>
-	
 
 </div>

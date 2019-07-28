@@ -5,12 +5,14 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.awieclawski.quiz.models.DifficultyLevel;
 import edu.awieclawski.quiz.repositories.DifficultyLevelRepository;
@@ -39,12 +41,30 @@ public class DifficultyLevelController {
 	}
 
 	@GetMapping(path = "/secondstep")
-	public String presentDifficultyLevels(@ModelAttribute("testTypeNameToPost") String selectedTestTypeName,
+	public String presentDifficultyLevels(
+			@ModelAttribute("selectedTestTypeName") String selectedTestTypeName,
 			Model model) {
-		model.addAttribute("TestTypeNameToDisplay", selectedTestTypeName);
-		logger.debug("difficultyLevelRepository count: " + difficultyLevelRepository.count());
+		model.addAttribute("selectedTestTypeName", selectedTestTypeName);
+		logger.info(" ### selectedTestTypeName: " + selectedTestTypeName);
 		model.addAttribute("difficultyLevels", difficultyLevelRepository.findAll());
+		logger.info(" $$$ testRepository count: " + difficultyLevelRepository.count());
 		return "/quiz/stepsecond";
+	}
+
+	@PostMapping(path = "/secondstep")
+	public String selectDifficultyLevel(
+			@ModelAttribute("difficultyLevel_Id") Long selectedDifficultyLevelId,
+			@ModelAttribute("selectedTestTypeName") String selectedTestTypeName, 
+			Model model,
+			RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("selectedDifficultyLevelName",
+				difficultyLevelRepository.findById(selectedDifficultyLevelId).get().getDifficultyLevelName());
+		logger.info(" *** selectDifficultyLevel() difficultyLevel_Id: {}", selectedDifficultyLevelId);
+		
+		redirectAttributes.addFlashAttribute("selectedTestTypeName", selectedTestTypeName);
+		logger.info( " &&& remind redirected selectedTestTypeName: "+selectedTestTypeName);
+		return "redirect:/quiz/thirdstep";
+//		return "redirect:/test/thirdstep";
 	}
 
 }

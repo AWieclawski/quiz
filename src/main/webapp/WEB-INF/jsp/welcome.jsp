@@ -25,7 +25,7 @@
 
     <div class="content">
 
-        <jsp:include page="partials/content_01.jsp"/>
+        <jsp:include page="partials/content_00.jsp"/>
 
     </div>
 

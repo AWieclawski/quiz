@@ -48,12 +48,15 @@ public class TestTypeController {
 	}
 
 	@PostMapping(path = "/firststep")
-	public String selectTestType(@ModelAttribute("testType_Id") Long selectedTestTypeId, ModelMap model,
+	public String selectTestType(
+			@ModelAttribute("testType_Id") Long selectedTestTypeId, 
+			Model model,
 			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("testTypeNameToPost",
+		redirectAttributes.addFlashAttribute("selectedTestTypeName",
 				testTypeRepository.findById(selectedTestTypeId).get().getTestTypeName());
 		logger.debug("selectTestType() testType_Id: {}", selectedTestTypeId);
-		return "redirect:/quiz/secondstep/";
+		return "redirect:/quiz/secondstep";
+//		return "redirect:/difficultylevel/secondstep";
 	}
 
 }
