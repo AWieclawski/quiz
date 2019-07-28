@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.awieclawski.quiz.models.TestType;
 import edu.awieclawski.quiz.repositories.TestTypeRepository;
@@ -47,10 +48,12 @@ public class TestTypeController {
 	}
 
 	@PostMapping(path = "/firststep")
-	public String selectTestType(@ModelAttribute("testType_Id") Long selectedTestTypeId, ModelMap model) {
-		String testTypeNameToPost = testTypeRepository.findById(selectedTestTypeId).get().getTestTypeName();
-		logger.debug("testTypeNameToPost" + testTypeNameToPost);
-		return "redirect:/difficultylevel/secondstep/" + testTypeNameToPost;
+	public String selectTestType(@ModelAttribute("testType_Id") Long selectedTestTypeId, ModelMap model,
+			RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("testTypeNameToPost",
+				testTypeRepository.findById(selectedTestTypeId).get().getTestTypeName());
+		logger.debug("selectTestType() testType_Id: {}", selectedTestTypeId);
+		return "redirect:/quiz/secondstep/";
 	}
 
 }
