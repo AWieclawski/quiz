@@ -7,7 +7,7 @@
 
 		<ul class="button-container">
 		  <li><a href="/welcome"><img src="/img/quiz.png" height="40" alt="Quiz"></a></li>
-		  <li><a href="/testtype/firststep">Quiz</a></li>
+		  <li><a href="/quiz/firststep">Quiz</a></li>
 		  <li><a href="#">News</a></li>
 		  <li><a href="#">Contact</a></li>
 		  <li class="right"><a href="#">About</a></li>

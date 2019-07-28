@@ -19,7 +19,7 @@ import edu.awieclawski.quiz.repositories.TestTypeRepository;
 @Controller
 @RequestMapping(path = "/testtype")
 public class TestTypeController {
-	
+
 	private static final Logger logger = LogManager.getLogger(TestTypeController.class.getName());
 
 	@Autowired
@@ -30,29 +30,27 @@ public class TestTypeController {
 		TestType tt = new TestType();
 		tt.setTestTypeName(testTypeName);
 		testTypeRepository.save(tt);
-		
+
 		return testTypeName.concat(" saved. OK\n");
 	}
 
-	@GetMapping (path="/all")
-	public @ResponseBody Iterable<TestType> getAllTestTypes(){
+	@GetMapping(path = "/all")
+	public @ResponseBody Iterable<TestType> getAllTestTypes() {
 		return testTypeRepository.findAll();
 	}
-	
+
 	@GetMapping(path = "/firststep")
 	public String presentTestTypes(Model model) {
-		logger.debug("presentTestTypes()");
-		logger.info("testTypeRepository count: " + testTypeRepository.count());
+		logger.debug("testTypeRepository count: " + testTypeRepository.count());
 		model.addAttribute("testTypes", testTypeRepository.findAll());
 		return "/quiz/stepfirst";
 	}
 
 	@PostMapping(path = "/firststep")
 	public String selectTestType(@ModelAttribute("testType_Id") Long selectedTestTypeId, ModelMap model) {
-		logger.debug("selectTestType() : {}", selectedTestTypeId);
-		logger.info("selectedTestTypeName: "+ testTypeRepository.findById(selectedTestTypeId).get().getTestTypeName()); 
-		model.addAttribute("selectedTestType", testTypeRepository.findById(selectedTestTypeId).get());
-		return "redirect:/quiz/secondstep";
+		String testTypeNameToPost = testTypeRepository.findById(selectedTestTypeId).get().getTestTypeName();
+		logger.debug("testTypeNameToPost" + testTypeNameToPost);
+		return "redirect:/difficultylevel/secondstep/" + testTypeNameToPost;
 	}
-	
+
 }

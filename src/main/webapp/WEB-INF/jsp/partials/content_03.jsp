@@ -9,7 +9,7 @@
 	<h3>Quiz building</h3>
 	<p>Select the difficulty level from among those available in the
 		database.</p>
-	<p>Selected Test Type: <strong>${selectedTestType.testTypeName}</strong></p>
+	<p>Selected test type: <strong>${TestTypeNameToDisplay}</strong></p>
 
 </div>
 
