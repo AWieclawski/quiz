@@ -55,7 +55,7 @@ public class DifficultyLevelController {
 	public String selectDifficultyLevel(
 			@ModelAttribute("difficultyLevel_Id") Long selectedDifficultyLevelId,
 			@ModelAttribute("selectedTestTypeName") String selectedTestTypeName, 
-			Model model,
+			ModelMap model,
 			RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("selectedDifficultyLevelName",
 				difficultyLevelRepository.findById(selectedDifficultyLevelId).get().getDifficultyLevelName());
@@ -64,7 +64,6 @@ public class DifficultyLevelController {
 		redirectAttributes.addFlashAttribute("selectedTestTypeName", selectedTestTypeName);
 		logger.info( " &&& remind redirected selectedTestTypeName: "+selectedTestTypeName);
 		return "redirect:/quiz/thirdstep";
-//		return "redirect:/test/thirdstep";
 	}
 
 }

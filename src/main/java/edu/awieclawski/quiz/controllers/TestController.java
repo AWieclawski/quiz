@@ -58,7 +58,7 @@ public class TestController {
 	@PostMapping(path = "/thirdstep")
 	public String selectTest(
 			@ModelAttribute("test_Id") Long selectedTestId,
-			Model model,
+			ModelMap model,
 			RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("selectedTestName",
 				testRepository.findById(selectedTestId).get().getTestName());
