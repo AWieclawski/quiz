@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.awieclawski.quiz.models.DifficultyLevel;
+import edu.awieclawski.quiz.models.TestType;
 import edu.awieclawski.quiz.repositories.DifficultyLevelRepository;
 
 @Controller
 @RequestMapping(path = "/difficultylevel")
+@SessionAttributes("sessionDifficultyLevel")
 public class DifficultyLevelController {
 
 	private static final Logger logger = LogManager.getLogger(DifficultyLevelController.class.getName());
@@ -26,26 +30,17 @@ public class DifficultyLevelController {
 	@Autowired
 	DifficultyLevelRepository difficultyLevelRepository;
 
-	@GetMapping(path = "/add")
-	public @ResponseBody String addNewDifficultyLevel(@RequestParam String difficultyLevelName) {
-		DifficultyLevel dl = new DifficultyLevel();
-		dl.setDifficultyLevelName(difficultyLevelName);
-		difficultyLevelRepository.save(dl);
-
-		return difficultyLevelName.concat(" saved. OK\n");
-	}
-
-	@GetMapping(path = "/all")
-	public @ResponseBody Iterable<DifficultyLevel> getAllDifficultyLevels() {
-		return difficultyLevelRepository.findAll();
+	@ModelAttribute("sessionDifficultyLevel")
+	public DifficultyLevel setUpDifficultyLevel() {
+		return new DifficultyLevel();
 	}
 
 	@GetMapping(path = "/secondstep")
 	public String presentDifficultyLevels(
-			@ModelAttribute("selectedTestTypeName") String selectedTestTypeName,
+			@SessionAttribute("sessionTestType") TestType selectedTestType, 
 			Model model) {
-		model.addAttribute("selectedTestTypeName", selectedTestTypeName);
-		logger.info(" ### selectedTestTypeName: " + selectedTestTypeName);
+		model.addAttribute("selectedTestType", selectedTestType);
+		logger.info(" ### selectedTestType: " + selectedTestType);
 		model.addAttribute("difficultyLevels", difficultyLevelRepository.findAll());
 		logger.info(" $$$ testRepository count: " + difficultyLevelRepository.count());
 		return "/quiz/stepsecond";
@@ -54,16 +49,16 @@ public class DifficultyLevelController {
 	@PostMapping(path = "/secondstep")
 	public String selectDifficultyLevel(
 			@ModelAttribute("difficultyLevel_Id") Long selectedDifficultyLevelId,
-			@ModelAttribute("selectedTestTypeName") String selectedTestTypeName, 
+			@ModelAttribute("sessionDifficultyLevel") DifficultyLevel sessionDifficultyLevel, 
 			ModelMap model,
 			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("selectedDifficultyLevelName",
-				difficultyLevelRepository.findById(selectedDifficultyLevelId).get().getDifficultyLevelName());
-		logger.info(" *** selectDifficultyLevel() difficultyLevel_Id: {}", selectedDifficultyLevelId);
+		sessionDifficultyLevel = difficultyLevelRepository
+				.findById(selectedDifficultyLevelId).get();
+		model.addAttribute("selectedDifficultyLevel",sessionDifficultyLevel);
+		logger.info(" *** selectedDifficultyLevel: " + sessionDifficultyLevel.toString());
 		
-		redirectAttributes.addFlashAttribute("selectedTestTypeName", selectedTestTypeName);
-		logger.info( " &&& remind redirected selectedTestTypeName: "+selectedTestTypeName);
-		return "redirect:/quiz/thirdstep";
+//		return "redirect:/quiz/thirdstep";
+		return "redirect:/test/thirdstep";
 	}
 
 }

@@ -11,10 +11,10 @@
 		<h3>Quiz building</h3>
 		<p>Select the test from among those available in the database.</p>
 		<p>
-			Selected test type: <strong>${selectedTestTypeName}</strong>
+			Selected test type: <strong>${selectedTestType.testTypeName}</strong>  
 		</p>
 		<p>
-			Selected difficulty level: <strong>${selectedDifficultyLevelName}</strong>
+			Selected difficulty level: <strong>${selectedDifficultyLevel.difficultyLevelName}</strong>  
 		</p>
 
 	</div>
@@ -31,14 +31,14 @@
 		<table>
 
 			<col width="10">
-
-			<!-- 			<thead>
+<!--  
+					<thead>
 				<tr>
 					<th colspan=2><input type="submit" value="Confirm&NextStep">
 						<input type="reset" value="Reset"></th>
 				</tr>
-			</thead>	 -->
-
+			</thead>	 
+-->
 			<tbody>
 				<c:forEach items="${tests}" var="test">
 					<tr>
@@ -51,11 +51,6 @@
 			</tbody>
 
 		</table>
-
-		<input type="hidden" name="selectedTestTypeName"
-			value="${selectedTestTypeName}"> <input type="hidden"
-			name="selectedDifficultyLevelName"
-			value="${selectedDifficultyLevelName}">
 
 	</form>
 

@@ -26,4 +26,12 @@ public class DifficultyLevel {
 	public void setDifficultyLevelName(String difficultyLevelName) {
 		this.difficultyLevelName = difficultyLevelName;
 	}
+
+	@Override
+	public String toString() {
+		return "DifficultyLevel [difficultyLevelId=" + difficultyLevelId + ", difficultyLevelName="
+				+ difficultyLevelName + "]";
+	}
+	
+	
 }

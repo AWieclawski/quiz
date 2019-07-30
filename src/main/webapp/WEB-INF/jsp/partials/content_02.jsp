@@ -12,7 +12,7 @@
 		<p>Select the difficulty level from among those available in the
 			database.</p>
 		<p>
-			Selected test type: <strong>${selectedTestTypeName}</strong>
+ 			Selected test type: <strong>${selectedTestType.testTypeName}</strong> 
 		</p>
 
 	</div>
@@ -48,10 +48,6 @@
 			</tbody>
 
 		</table>
-
-		<input type="hidden" name="selectedTestTypeName"
-			value="${selectedTestTypeName}">
-
 	</form>
 
 

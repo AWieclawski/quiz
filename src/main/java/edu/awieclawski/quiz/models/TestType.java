@@ -26,4 +26,11 @@ public class TestType {
 	public void setTestTypeName(String testTypeName) {
 		this.testTypeName = testTypeName;
 	}
+
+	@Override
+	public String toString() {
+		return "TestType [testTypeId=" + testTypeId + ", testTypeName=" + testTypeName + "]";
+	}
+	
+	
 }

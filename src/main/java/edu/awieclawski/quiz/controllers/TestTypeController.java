@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.awieclawski.quiz.models.TestType;
@@ -19,6 +20,7 @@ import edu.awieclawski.quiz.repositories.TestTypeRepository;
 
 @Controller
 @RequestMapping(path = "/testtype")
+@SessionAttributes("sessionTestType")
 public class TestTypeController {
 
 	private static final Logger logger = LogManager.getLogger(TestTypeController.class.getName());
@@ -26,36 +28,30 @@ public class TestTypeController {
 	@Autowired
 	private TestTypeRepository testTypeRepository;
 
-	@GetMapping(path = "/add")
-	public @ResponseBody String addNewTestType(@RequestParam String testTypeName) {
-		TestType tt = new TestType();
-		tt.setTestTypeName(testTypeName);
-		testTypeRepository.save(tt);
-
-		return testTypeName.concat(" saved. OK\n");
-	}
-
-	@GetMapping(path = "/all")
-	public @ResponseBody Iterable<TestType> getAllTestTypes() {
-		return testTypeRepository.findAll();
+	@ModelAttribute("sessionTestType")
+	public TestType setUpTestType() {
+		return new TestType();
 	}
 
 	@GetMapping(path = "/firststep")
 	public String presentTestTypes(Model model) {
-		logger.debug("testTypeRepository count: " + testTypeRepository.count());
 		model.addAttribute("testTypes", testTypeRepository.findAll());
+		logger.info(" $$$ testTypeRepository count: " + testTypeRepository.count());
 		return "/quiz/stepfirst";
 	}
 
 	@PostMapping(path = "/firststep")
 	public String selectTestType(
-			@ModelAttribute("testType_Id") Long selectedTestTypeId, 
+			@ModelAttribute("testType_Id") Long selectedTestTypeId,
+			@ModelAttribute("sessionTestType") TestType sessionTestType, 
 			ModelMap model,
 			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("selectedTestTypeName",
-				testTypeRepository.findById(selectedTestTypeId).get().getTestTypeName());
-		logger.debug("selectTestType() testType_Id: {}", selectedTestTypeId);
-		return "redirect:/quiz/secondstep";
+			sessionTestType = testTypeRepository
+					.findById(selectedTestTypeId).get();
+			model.addAttribute("selectedTestType", sessionTestType);
+			logger.info(" *** selectedTestType: " + sessionTestType.toString());
+//		return "redirect:/quiz/secondstep";
+		return "redirect:/difficultylevel/secondstep";
 	}
 
 }

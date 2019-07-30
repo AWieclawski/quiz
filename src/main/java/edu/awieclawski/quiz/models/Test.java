@@ -58,4 +58,13 @@ public class Test {
 	public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
 		this.difficultyLevel = difficultyLevel;
 	}
+
+	@Override
+	public String toString() {
+		return "Test [testId=" + testId + ", testName=" + testName + ", status=" + status + ", testType=" + testType
+				+ ", difficultyLevel=" + difficultyLevel + "]";
+	}
+	
+	
+	
 }
