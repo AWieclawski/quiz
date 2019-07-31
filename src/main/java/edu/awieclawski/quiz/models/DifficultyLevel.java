@@ -11,6 +11,15 @@ public class DifficultyLevel {
 	private Long difficultyLevelId;
 	private String difficultyLevelName;
 
+	public DifficultyLevel(Long difficultyLevelId, String difficultyLevelName) {
+		this.difficultyLevelId = difficultyLevelId;
+		this.difficultyLevelName = difficultyLevelName;
+	}
+
+	public DifficultyLevel() {
+		super();
+	}
+
 	public Long getDifficultyLevelId() {
 		return difficultyLevelId;
 	}
@@ -32,6 +41,5 @@ public class DifficultyLevel {
 		return "DifficultyLevel [difficultyLevelId=" + difficultyLevelId + ", difficultyLevelName="
 				+ difficultyLevelName + "]";
 	}
-	
-	
+
 }

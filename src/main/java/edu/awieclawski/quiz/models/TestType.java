@@ -11,6 +11,15 @@ public class TestType {
 	private Long testTypeId;
 	private String testTypeName;
 
+	public TestType(Long testTypeId, String testTypeName) {
+		this.testTypeId = testTypeId;
+		this.testTypeName = testTypeName;
+	}
+
+	public TestType() {
+		super();
+	}
+
 	public Long getTestTypeId() {
 		return testTypeId;
 	}
@@ -31,6 +40,5 @@ public class TestType {
 	public String toString() {
 		return "TestType [testTypeId=" + testTypeId + ", testTypeName=" + testTypeName + "]";
 	}
-	
-	
+
 }

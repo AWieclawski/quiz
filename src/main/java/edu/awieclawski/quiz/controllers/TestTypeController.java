@@ -4,14 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,7 +31,7 @@ public class TestTypeController {
 	}
 
 	@GetMapping(path = "/firststep")
-	public String presentTestTypes(Model model) {
+	public String presentTestTypes(ModelMap model) {
 		model.addAttribute("testTypes", testTypeRepository.findAll());
 		logger.info(" $$$ testTypeRepository count: " + testTypeRepository.count());
 		return "/quiz/stepfirst";
@@ -49,7 +46,7 @@ public class TestTypeController {
 			sessionTestType = testTypeRepository
 					.findById(selectedTestTypeId).get();
 			model.addAttribute("selectedTestType", sessionTestType);
-			logger.info(" *** selectedTestType: " + sessionTestType.toString());
+			logger.info(" *** selectedTestType established: " + sessionTestType.toString());
 //		return "redirect:/quiz/secondstep";
 		return "redirect:/difficultylevel/secondstep";
 	}

@@ -4,13 +4,39 @@ or do it by one command only in project dir.: $ mvn clean spring-boot:run
 
 and visit to: http://localhost:8080
 
-Add some users via CLI commands ex.:
-//privilege established by APi is always EXPLOITER, never RULER
-$ curl 'localhost:8080/user/add?userName=Andy&login=andy&password=AndyPassword&privilege=0&status=1'
-//acceptable example with wrong numbers (keys) in privilege and status fields ('11' instead of '1'):
-curl 'localhost:8080/user/add?userName=Example&login=exy&password=ExamplePassword&privilege=11&status=11'
-and list'em:
-$ curl 'localhost:8080/user/all' 
 
-$ curl 'localhost:8080/difficultylevel/add?difficultyLevelName=Easy'
-$ curl 'localhost:8080/testtype/add?testTypeName=HTML'
+// Iterable<TestType> all(): 
+$ curl -v localhost:8080/api/ttypes
+
+// Iterable<DifficultyLevel> all(): 
+$ curl -v localhost:8080/api/difflevels
+
+// Iterable<Test> all(): 
+$ curl -v localhost:8080/api/tests
+$ curl -v localhost:8080/api/tests/1
+
+// Iterable<QuestionSet> all(): 
+$ curl -v localhost:8080/api/qset
+
+//addNewQuestionSet: 
+$ curl -X POST localhost:8080/api/qset -H\
+'Content-type:application/json'-d '{\
+"questionSetId":1,\
+"question":"Question_01_HTML_EASY",\
+"firstAnswer":"firstAnswer_of_Question_01",\
+"secondAnswer":"secondAnswer_of_Question_01",\
+"thirdAnswer":"thirdAnswer_of_Question_01",\
+"fourthAnswer":"fourthAnswer_of_Question_01",\
+"test":\
+{"testId":1,\
+"testName":"HTML_EASY_01",\
+"status":"active",\
+"testType":\
+{"testTypeId":1,\
+"testTypeName":"HTML"},\
+"difficultyLevel":\
+{"difficultyLevelId":1,\
+"difficultyLevelName":"Easy"}\
+}\
+}'
+

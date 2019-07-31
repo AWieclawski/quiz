@@ -24,10 +24,10 @@ public class QestionSetApiController {
 		return questionSetRepository.findAll();
 	}
 
-	@GetMapping("/qset/{qsetId}")
-	QuestionSet getQuestionSetById(@PathVariable Long qsetId) {
-		return questionSetRepository.findById(qsetId)
-				.orElseThrow(() -> new QuestionSetNotFoundException(qsetId));
+	@GetMapping("/qset/{questionSetId}")
+	QuestionSet getQuestionSetById(@PathVariable Long questionSetId) {
+		return questionSetRepository.findById(questionSetId)
+				.orElseThrow(() -> new QuestionSetNotFoundException(questionSetId));
 	}
 
 	@PostMapping("/qset")
