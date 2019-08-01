@@ -8,14 +8,20 @@
 	<div class="description">
 
 		<h1>Step Third</h1>
-		<h3>Quiz building</h3>
-		<p>Select the test from among those available in the database.</p>
-		<p>
-			Selected test type: <strong>${selectedTestType.testTypeName}</strong>  
-		</p>
-		<p>
-			Selected difficulty level: <strong>${selectedDifficultyLevel.difficultyLevelName}</strong>  
-		</p>
+
+		<div class="scrollable">
+		
+			<h3>Quiz building</h3>
+			<p>
+				Selected test type: <strong>${selectedTestType.testTypeName}</strong>
+			</p>
+			<p>
+				Selected difficulty level: <strong>${selectedDifficultyLevel.difficultyLevelName}</strong>
+			</p>
+			<p>Now, select the test from among those available in the
+				database.</p>
+
+		</div>
 
 	</div>
 
@@ -25,13 +31,14 @@
 
 	<h1>Tests:</h1>
 
+	<div class="scrollable">
 
-	<form action="/test/thirdstep" method="post">
+		<form action="/test/thirdstep" method="post">
 
-		<table>
+			<table>
 
-			<col width="10">
-<!--  
+				<col width="10">
+				<!--  
 					<thead>
 				<tr>
 					<th colspan=2><input type="submit" value="Confirm&NextStep">
@@ -39,19 +46,21 @@
 				</tr>
 			</thead>	 
 -->
-			<tbody>
-				<c:forEach items="${tests}" var="test">
-					<tr>
-						<td colspan=1><input type="radio" name="test_Id"
-							value="${test.testId}"></td>
-						<td>${test.testName}</td>
-					</tr>
-				</c:forEach>
+				<tbody>
+					<c:forEach items="${tests}" var="test">
+						<tr>
+							<td colspan=1><input type="radio" name="test_Id"
+								value="${test.testId}"></td>
+							<td>${test.testName}</td>
+						</tr>
+					</c:forEach>
 
-			</tbody>
+				</tbody>
 
-		</table>
+			</table>
 
-	</form>
+		</form>
+
+	</div>
 
 </div>

@@ -5,7 +5,12 @@
 	<div class="description">
 
 		<h1>Welcome</h1>
-		<p>This is welcome page of the quiz</p>
+
+		<div class="scrollable">
+
+			<p>This is welcome page of the quiz</p>
+
+		</div>
 
 	</div>
 

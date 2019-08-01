@@ -20,14 +20,14 @@ body {
 	background-color: #333333;
 	color: #bbbbbb;
 	padding: 0px;
-	height: 400px;
+	height: 500px;
 }
 
 #left {
 	width: 30%;
 	float: left;
 	text-align: left;
-	height: 400px;
+	height: 500px;
 	background-color: #444444;
 }
 
@@ -36,15 +36,20 @@ body {
 	padding-right: 20px;
 }
 
-#left strong{
-color: #009999;
+#left strong {
+	color: #009999;
 }
 
 #right {
 	width: 70%;
 	float: left;
 	text-align: center;
+	height: 500px;
+}
+
+.scrollable {
 	height: 400px;
+	overflow: auto;
 }
 
 #right table th, td {
@@ -94,6 +99,7 @@ color: #009999;
 	padding: 0;
 	overflow: hidden;
 	background-color: #555555;
+	font-size: 14px;
 }
 
 .menu ul.button-container li {
