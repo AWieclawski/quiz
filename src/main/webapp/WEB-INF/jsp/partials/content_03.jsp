@@ -10,7 +10,7 @@
 		<h1>Step Third</h1>
 
 		<div class="scrollable">
-		
+
 			<h3>Quiz building</h3>
 			<p>
 				Selected test type: <strong>${selectedTestType.testTypeName}</strong>

@@ -18,9 +18,23 @@ $ curl -v localhost:8080/api/tests/1
 // Iterable<QuestionSet> all(): 
 $ curl -v localhost:8080/api/qset
 
+// Iterable<User> all(): 
+$ curl -v localhost:8080/api/users
+
+//addNewUser: 
+$ curl -X POST localhost:8080/api/users -H\
+'Content-type:application/json' -d\
+'{\
+"userId":3,\
+"userName":"CindyName",\
+"login":"Cindy",\
+"status":"active"\
+}'
+
+
 //addNewQuestionSet: 
 $ curl -X POST localhost:8080/api/qset -H\
-'Content-type:application/json'-d '{\
+'Content-type:application/json' -d '{\
 "questionSetId":1,\
 "question":"Question_01_HTML_EASY",\
 "firstAnswer":"firstAnswer_of_Question_01",\

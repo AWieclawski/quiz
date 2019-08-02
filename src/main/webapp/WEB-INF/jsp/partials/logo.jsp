@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:include page="info_bar.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<jsp:include page="info_bar.jsp" />
 
 <div class="menu">
 
-    <a href="/welcome"><img src="/img/quiz.png" height="50" alt="quiz"></a>
+	<a href="/welcome"><img src="/img/quiz.png" height="50" alt="quiz"></a>
 
 </div>

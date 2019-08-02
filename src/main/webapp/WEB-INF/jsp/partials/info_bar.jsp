@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%
     StringBuilder aggregatedCommunicate = new StringBuilder();
@@ -35,16 +36,15 @@
 
 <div class="infobar">
 
-    <div class="commcell" style="color:<%=communicateColor%>;"><%=aggregatedCommunicate%>
-    </div>
+	<div class="commcell" style="color:<%=communicateColor%>;"><%=aggregatedCommunicate%>
+	</div>
 
-    <div class="logincell">
+	<div class="logincell">
 
-        <%= barInfo %>
+		<%= barInfo %>
 
-    </div>
+	</div>
 
-    <div class="eraser">
-    </div>
+	<div class="eraser"></div>
 
 </div>
