@@ -8,6 +8,6 @@ import edu.awieclawski.quiz.models.TestType;
 
 public interface TestRepository extends CrudRepository<Test, Long> {
 
-	Test findByTestTypeAndDifficultyLevel(TestType testType, DifficultyLevel difficultyLevel);
+	Iterable<Test> findTestsByTestTypeAndDifficultyLevel(TestType testType, DifficultyLevel difficultyLevel);
 
 }

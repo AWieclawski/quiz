@@ -41,15 +41,10 @@ public class TestController {
 		model.addAttribute("selectedDifficultyLevel", selectedDifficultyLevel);
 		logger.info(" ### selectedDifficultyLevel get from session: " 
 		+ selectedDifficultyLevel.toString());
-		model.addAttribute("tests", testRepository
-//		.findByTestTypeAndDifficultyLevel(selectedTestType,selectedDifficultyLevel));
-		.findAll());
-		/*
-		 * TODO - establish query in TestController "from Test t where
-		 * t.testType.testTypeId =:testType_Id and
-		 * t.difficultyLevel.difficultyLevelId=:difficultyLevel_Id"
-		 */
-		logger.info(" $$$ testRepository count: " + testRepository.count());
+		Iterable<Test> testsThatMeetSelectedCriteria = testRepository
+		.findTestsByTestTypeAndDifficultyLevel(selectedTestType,selectedDifficultyLevel);
+		model.addAttribute("testsThatMeetSelectedCriteria",testsThatMeetSelectedCriteria);
+		logger.info(" $$$ testsThatMeetSelectedCriteria enumeration: " + testsThatMeetSelectedCriteria.toString());
 		return "/quiz/stepthird";
 	}
 

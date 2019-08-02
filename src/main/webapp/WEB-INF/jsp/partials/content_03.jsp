@@ -47,7 +47,7 @@
 			</thead>	 
 -->
 				<tbody>
-					<c:forEach items="${tests}" var="test">
+					<c:forEach items="${testsThatMeetSelectedCriteria}" var="test">
 						<tr>
 							<td colspan=1><input type="radio" name="test_Id"
 								value="${test.testId}"></td>
