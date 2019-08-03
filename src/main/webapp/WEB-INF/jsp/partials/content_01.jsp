@@ -27,6 +27,7 @@
 	<c:choose>
 
 		<c:when test="${results==null}">
+		
 			<p>
 				<strong>No ${resultsName} to select. Search result is
 					empty.</strong>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,14 +24,22 @@ import edu.awieclawski.quiz.repositories.TestRepository;
 public class TestController {
 
 	private static final Logger logger = LogManager.getLogger(TestController.class.getName());
+	private String infoMessageInit = "OK. Selected: ";
+	private String errorMessageInit = "Must select ";
+	private String resultsName = "tests";
+	private String resultName = "test";
 
 	@Autowired
 	private TestRepository testRepository;
 
 	@GetMapping(path = "/thirdstep")
 	public String presentTests(
+			@ModelAttribute("errorMessage") String errorMessageReceived,
+			@ModelAttribute("infoMessage") String infoMessageReceived,
 			HttpServletRequest request, 
 			ModelMap model) {
+		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
+		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
 		HttpSession session = request.getSession(false);
 		TestType selectedTestType = (TestType) session.getAttribute("sessionTestType");
 		model.addAttribute("selectedTestType", selectedTestType);
@@ -41,32 +50,35 @@ public class TestController {
 		Iterable<Test> resultsThatMeetSelectedCriteria = testRepository
 				.findTestsByTestTypeAndDifficultyLevel(selectedTestType, selectedDifficultyLevel);
 		model.addAttribute("results", resultsThatMeetSelectedCriteria);
-		model.addAttribute("resultsName", "tests");
-		model.addAttribute("resultName", "test");
+		model.addAttribute("resultsName", resultsName);
+		model.addAttribute("resultName", resultName);
 		logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + resultsThatMeetSelectedCriteria.toString());
 		return "/quiz/stepthird";
 	}
 
 	@PostMapping(path = "/thirdstep")
 	public String selectTest(
+			@ModelAttribute("errorMessage") String errorMessage,
+			@ModelAttribute("infoMessage") String infoMessage,
 			ModelMap model, 
 			HttpServletRequest request, 
 			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
-		if (session == null) {
-			session = request.getSession();
-		}
 		String selectedTestIdToString = null;
 		selectedTestIdToString = request.getParameter("submittedTest_Id");
-		
-		// check if submitted value is empty
+
 		if (selectedTestIdToString != null) {
 			Long selectedTestId = Long.valueOf(selectedTestIdToString);
 			Test selectedTest = testRepository.findById(selectedTestId).get();
 			session.setAttribute("sessionTest", selectedTest);
 			logger.info(" *** sessionTest set to session: " + selectedTest.toString());
+			infoMessage = infoMessageInit.concat(selectedTest.getTestName());
+			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
 			return "redirect:/quiz/exam";
 		} else {
+			errorMessage = errorMessageInit.concat(resultName).concat("!");
+			logger.info(" ^^^ errorMessage flash redirect: " + errorMessage);
+			redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
 			return "redirect:/quiz/thirdstep";
 		}
 	}

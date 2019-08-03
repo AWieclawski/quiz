@@ -121,6 +121,7 @@ body {
 
 .menu ul.button-container li a:hover {
 	background-color: #111111;
+	color: yellow;
 }
 
 .menu ul.button-container li a:active {
@@ -138,7 +139,7 @@ ul.button-container li.right {
 }
 
 .infobar {
-	background-color: #bbbbbb;
+	background-color: #aaaaaa;
 	padding: 5px;
 	color: black;
 }
@@ -147,6 +148,14 @@ ul.button-container li.right {
 	width: 75%;
 	float: left;
 	text-align: left;
+}
+
+.commcell strong {
+	color: red;
+}
+
+.commcell span {
+	color: green;
 }
 
 .logincell {

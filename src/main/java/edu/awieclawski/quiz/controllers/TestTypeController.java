@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,21 +22,32 @@ import edu.awieclawski.quiz.repositories.TestTypeRepository;
 public class TestTypeController {
 
 	private static final Logger logger = LogManager.getLogger(TestTypeController.class.getName());
+	private String infoMessageInit = "OK. Selected: ";
+	private String errorMessageInit = "Must select ";
+	private String resultsName = "test types";
+	private String resultName = "test type";
 
 	@Autowired
 	private TestTypeRepository testTypeRepository;
 
 	@GetMapping(path = "/firststep")
-	public String presentTestTypes(ModelMap model) {
+	public String presentTestTypes(
+			@ModelAttribute("errorMessage") String errorMessageReceived,
+			@ModelAttribute("infoMessage") String infoMessageReceived,
+			ModelMap model) {
+		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
+		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
 		model.addAttribute("results", testTypeRepository.findAll());
-		model.addAttribute("resultsName", "test types");
-		model.addAttribute("resultName", "test type");
+		model.addAttribute("resultsName", resultsName);
+		model.addAttribute("resultName", resultName);
 		logger.info(" $$$ testTypeRepository count: " + testTypeRepository.count());
 		return "/quiz/stepfirst";
 	}
 
 	@PostMapping(path = "/firststep")
 	public String selectTestType(
+			@ModelAttribute("errorMessage") String errorMessage,
+			@ModelAttribute("infoMessage") String infoMessage,
 			HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
@@ -45,15 +57,19 @@ public class TestTypeController {
         String selectedTestTypeIdToString = null;
         selectedTestTypeIdToString = request.getParameter("submittedTestType_Id");
 		
-        //check if submitted value is empty
 		if (selectedTestTypeIdToString != null) {
 			Long selectedTestTypeId = Long.valueOf(selectedTestTypeIdToString);
 			TestType selectedTestType = testTypeRepository.findById(selectedTestTypeId).get();
 			session.setAttribute("sessionTestType", selectedTestType);
 			logger.info(" *** sessionTestType set to session: " + selectedTestType.toString());
+			infoMessage = infoMessageInit.concat(selectedTestType.getTestTypeName());
+			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
+			redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
 			return "redirect:/quiz/secondstep";
-//		return "redirect:/difficultylevel/secondstep";
 		} else {
+			errorMessage = errorMessageInit.concat(resultName).concat("!");
+			logger.info(" ^^^ errorMessage flash redirect: " + errorMessage);
+			redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
 			return "redirect:/quiz/firststep";
 		}
 	}
