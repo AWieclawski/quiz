@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,25 +27,35 @@ public class TestTypeController {
 
 	@GetMapping(path = "/firststep")
 	public String presentTestTypes(ModelMap model) {
-		model.addAttribute("testTypes", testTypeRepository.findAll());
+		model.addAttribute("results", testTypeRepository.findAll());
+		model.addAttribute("resultsName", "test types");
+		model.addAttribute("resultName", "test type");
 		logger.info(" $$$ testTypeRepository count: " + testTypeRepository.count());
 		return "/quiz/stepfirst";
 	}
 
 	@PostMapping(path = "/firststep")
 	public String selectTestType(
-			@ModelAttribute("testType_Id") Long selectedTestTypeId,
 			HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			session = request.getSession();
 		}
-		TestType selectedTestType = testTypeRepository.findById(selectedTestTypeId).get();
-		session.setAttribute("sessionTestType", selectedTestType);
-		logger.info(" *** sessionTestType set to session: " + selectedTestType.toString());
-		return "redirect:/quiz/secondstep";
+        String selectedTestTypeIdToString = null;
+        selectedTestTypeIdToString = request.getParameter("submittedTestType_Id");
+		
+        //check if submitted value is empty
+		if (selectedTestTypeIdToString != null) {
+			Long selectedTestTypeId = Long.valueOf(selectedTestTypeIdToString);
+			TestType selectedTestType = testTypeRepository.findById(selectedTestTypeId).get();
+			session.setAttribute("sessionTestType", selectedTestType);
+			logger.info(" *** sessionTestType set to session: " + selectedTestType.toString());
+			return "redirect:/quiz/secondstep";
 //		return "redirect:/difficultylevel/secondstep";
+		} else {
+			return "redirect:/quiz/firststep";
+		}
 	}
 
 }

@@ -12,8 +12,7 @@
 		<div class="scrollable">
 
 			<h3>Quiz building</h3>
-			<p>Select the test type from among those available in the
-				database.</p>
+			<p>Select ${resultName} among those available in the database.</p>
 
 		</div>
 
@@ -23,38 +22,24 @@
 
 <div id="right">
 
-	<h1>Test types:</h1>
+	<h1>Available ${resultsName}:</h1>
 
-	<div class="scrollable">
+	<c:choose>
 
-		<form action="/testtype/firststep" method="post">
+		<c:when test="${results==null}">
+			<p>
+				<strong>No ${resultsName} to select. Search result is
+					empty.</strong>
+			</p>
 
-			<table>
+		</c:when>
 
-				<col width="10">
+		<c:otherwise>
 
-				<thead>
-					<tr>
-						<th colspan="2"><input type="submit" value="Confirm&NextStep">
-							<input type="reset" value="Reset"></th>
-					</tr>
-				</thead>
+			<jsp:include page="../partials/right/testtypes.jsp"></jsp:include>
 
-				<tbody>
-					<c:forEach items="${testTypes}" var="testType">
-						<tr>
-							<td colspan=1><input type="radio" name="testType_Id"
-								value="${testType.testTypeId}"></td>
-							<td>${testType.testTypeName}</td>
-						</tr>
-					</c:forEach>
+		</c:otherwise>
 
-				</tbody>
-
-			</table>
-
-		</form>
-
-	</div>
+	</c:choose>
 
 </div>

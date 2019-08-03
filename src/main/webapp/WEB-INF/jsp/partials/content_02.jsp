@@ -13,10 +13,10 @@
 
 			<h3>Quiz building</h3>
 			<p>
-				Selected test type: <strong>${selectedTestType.testTypeName}</strong>
+				1. selected criterion: <strong>${selectedTestType.testTypeName}</strong>
 			</p>
-			<p>Now, select the difficulty level from among those available in
-				the database.</p>
+			<p>Now, select ${resultName} among those available in the
+				database.</p>
 
 		</div>
 
@@ -26,38 +26,24 @@
 
 <div id="right">
 
-	<h1>Difficulty levels:</h1>
+	<h1>Available ${resultsName}:</h1>
 
-	<div class="scrollable">
+	<c:choose>
 
-		<form action="/difficultylevel/secondstep" method="post">
+		<c:when test="${results==null}">
+			<p>
+				<strong>No ${resultsName} to select. Search result is
+					empty.</strong>
+			</p>
 
-			<table>
+		</c:when>
 
-				<col width="10">
+		<c:otherwise>
 
-				<thead>
-					<tr>
-						<th colspan=2><input type="submit" value="Confirm&NextStep">
-							<input type="reset" value="Reset"></th>
-					</tr>
-				</thead>
+			<jsp:include page="../partials/right/difficultylevels.jsp"></jsp:include>
 
-				<tbody>
-					<c:forEach items="${difficultyLevels}" var="difficultyLevel">
-						<tr>
-							<td colspan=1><input type="radio" name="difficultyLevel_Id"
-								value="${difficultyLevel.difficultyLevelId}"></td>
-							<td>${difficultyLevel.difficultyLevelName}</td>
-						</tr>
-					</c:forEach>
+		</c:otherwise>
 
-				</tbody>
-
-			</table>
-
-		</form>
-
-	</div>
+	</c:choose>
 
 </div>

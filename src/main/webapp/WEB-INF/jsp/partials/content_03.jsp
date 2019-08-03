@@ -13,13 +13,13 @@
 
 			<h3>Quiz building</h3>
 			<p>
-				Selected test type: <strong>${selectedTestType.testTypeName}</strong>
+				1. selected criterion: <strong>${selectedTestType.testTypeName}</strong>
 			</p>
 			<p>
-				Selected difficulty level: <strong>${selectedDifficultyLevel.difficultyLevelName}</strong>
+				2. selected criterion: <strong>${selectedDifficultyLevel.difficultyLevelName}</strong>
 			</p>
-			<p>Now, select the test from among those available in the
-				database.</p>
+			<p>Now, select ${resultName} among the results that met the
+				selected criteria.</p>
 
 		</div>
 
@@ -29,38 +29,24 @@
 
 <div id="right">
 
-	<h1>Tests:</h1>
+	<h1>Available ${resultsName}:</h1>
 
-	<div class="scrollable">
+	<c:choose>
 
-		<form action="/test/thirdstep" method="post">
+		<c:when test="${results==null}">
+			<p>
+				<strong>No ${resultsName} to select. Search result is
+					empty.</strong>
+			</p>
 
-			<table>
+		</c:when>
 
-				<col width="10">
-				<!--  
-					<thead>
-				<tr>
-					<th colspan=2><input type="submit" value="Confirm&NextStep">
-						<input type="reset" value="Reset"></th>
-				</tr>
-			</thead>	 
--->
-				<tbody>
-					<c:forEach items="${testsThatMeetSelectedCriteria}" var="test">
-						<tr>
-							<td colspan=1><input type="radio" name="test_Id"
-								value="${test.testId}"></td>
-							<td>${test.testName}</td>
-						</tr>
-					</c:forEach>
+		<c:otherwise>
 
-				</tbody>
+			<jsp:include page="../partials/right/tests.jsp"></jsp:include>
 
-			</table>
+		</c:otherwise>
 
-		</form>
-
-	</div>
+	</c:choose>
 
 </div>
