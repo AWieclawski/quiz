@@ -23,7 +23,7 @@ public class TestTypeController {
 
 	private static final Logger logger = LogManager.getLogger(TestTypeController.class.getName());
 	private String infoMessageInit = "OK. Selected: ";
-	private String errorMessageInit = "Must select ";
+	private String errorMessageInit = "Select ";
 	private String resultsName = "test types";
 	private String resultName = "test type";
 

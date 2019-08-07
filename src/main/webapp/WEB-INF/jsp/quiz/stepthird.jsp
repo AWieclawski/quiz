@@ -17,6 +17,8 @@
 <body>
 
 	<div class="container">
+	
+		<jsp:include page="../partials/info_bar.jsp" />
 
 		<div class="navbar">
 

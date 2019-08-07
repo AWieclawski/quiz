@@ -25,7 +25,7 @@ public class TestController {
 
 	private static final Logger logger = LogManager.getLogger(TestController.class.getName());
 	private String infoMessageInit = "OK. Selected: ";
-	private String errorMessageInit = "Must select ";
+	private String errorMessageInit = "Select ";
 	private String resultsName = "tests";
 	private String resultName = "test";
 

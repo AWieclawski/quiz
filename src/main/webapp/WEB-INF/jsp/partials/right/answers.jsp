@@ -2,26 +2,29 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div class="scrollable">
 
-		<table>
+	<table>
 
-			<col width="10">
+		<col width="10">
 
-			<tbody>
- 
-				<c:forEach items="${results}" var="thisTestSelection">
+		<tbody>
 
-					<tr>
-						<td colspan=1><input type="radio" name="submittedTest_Id"
-							value="${thisTestSelections.key+1}"></td>
-						<td>${thisTestSelections.value}</td>
-					</tr>
+			<c:forEach items="${results}" var="thisTestSelection">
 
-				</c:forEach>
+				<tr>
 
-			</tbody>
+					<td>${thisTestSelection.key+1}</td>
 
-		</table>
+					<td>${thisTestSelection.value}</td>
+
+				</tr>
+
+			</c:forEach>
+
+		</tbody>
+
+	</table>
 
 </div>

@@ -24,7 +24,7 @@ body {
 }
 
 #left {
-	width: 30%;
+	width: 35%;
 	float: left;
 	text-align: left;
 	height: 500px;
@@ -32,8 +32,8 @@ body {
 }
 
 #left .description {
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #left strong {
@@ -41,7 +41,7 @@ body {
 }
 
 #right {
-	width: 70%;
+	width: 65%;
 	float: left;
 	text-align: center;
 	height: 500px;
@@ -63,7 +63,7 @@ body {
 
 #right table {
 	padding: 10px;
-	margin: 0px 20px;
+	margin: 0px 10px;
 	width: 90%;
 }
 
@@ -142,6 +142,8 @@ ul.button-container li.right {
 	background-color: #222222;
 	padding: 5px;
 	color: white;
+	position: sticky;
+	top: 10px;
 }
 
 .commcell {
@@ -151,11 +153,11 @@ ul.button-container li.right {
 }
 
 .commcell strong {
-	color: red;
+	color: orange;
 }
 
 .commcell span {
-	color: #39ff14;
+	color: #009999;
 }
 
 .logincell {

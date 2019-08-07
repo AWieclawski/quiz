@@ -24,7 +24,7 @@ public class DifficultyLevelController {
 
 	private static final Logger logger = LogManager.getLogger(DifficultyLevelController.class.getName());
 	private String infoMessageInit = "OK. Selected: ";
-	private String errorMessageInit = "Must select ";
+	private String errorMessageInit = "Select ";
 	private String resultsName = "difficulty levels";
 	private String resultName = "difficulty level";
 

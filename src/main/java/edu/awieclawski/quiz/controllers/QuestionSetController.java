@@ -1,5 +1,6 @@
 package edu.awieclawski.quiz.controllers;
 
+//import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.awieclawski.quiz.models.QuestionSet;
 import edu.awieclawski.quiz.models.Test;
 import edu.awieclawski.quiz.repositories.QuestionSetRepository;
+import edu.awieclawski.quiz.services.ExamServices;
 
 
 @Controller
@@ -32,6 +34,12 @@ public class QuestionSetController {
 
 	@Autowired
 	private QuestionSetRepository questionSetRepository;
+	
+	private ExamServices examServices;
+	@Autowired
+	public void setExamServices(ExamServices examServices) {
+		this.examServices = examServices;
+	}
 
 	@GetMapping(path = "/exam")
 	public String presentQuestionSets(
@@ -49,8 +57,8 @@ public class QuestionSetController {
 		
 //		conditional initiation of question number & session attribute
 		if (currentQuestion == null) {
-			session.setAttribute("currentQuestion", 0);
-			currentQuestion = (Integer) session.getAttribute("currentQuestion") ;
+			currentQuestion = 0;
+			session.setAttribute("currentQuestion", currentQuestion);
 		}
 		
 		logger.info(" $$$ currentQuestion: " + currentQuestion);
@@ -66,16 +74,26 @@ public class QuestionSetController {
 				logger.info(" $$$ totalNumberOfQuestions: " + totalNumberOfQuestions);
 				session.setAttribute("thisTestTotalNumberOfQuestions", totalNumberOfQuestions);
 				
+				QuestionSet thisTestQestionSet = thisTestQestionSetsList.get(currentQuestion);
+				
+				@SuppressWarnings("unchecked")
 				Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session
 						.getAttribute("thisTestSelectionsMap");
 				logger.info(" $$$ thisTestSelectionsMap: " + mapOfUserAnswers);
+				
+				// Initialization of 'nothing selected' user's answers map 
+				if (mapOfUserAnswers == null) {
+					mapOfUserAnswers = examServices.userSelectionsMapInit(totalNumberOfQuestions);
+					logger.info(" $$$ userSelectionsMapInit: " + mapOfUserAnswers);
+					session.setAttribute("thisTestSelectionsMap", mapOfUserAnswers);
+				}
 
 				model.addAttribute("questionNumber", currentQuestion);
-				model.addAttribute("questionSet", thisTestQestionSetsList.get(currentQuestion));
+				model.addAttribute("questionSet", thisTestQestionSet);
+				model.addAttribute("thisTest", selectedTest);
 				model.addAttribute("results", mapOfUserAnswers);
 				model.addAttribute("resultsName", resultsName);
 				model.addAttribute("resultName", resultName);
-				model.addAttribute("thisTest", selectedTest);
 				return "/quiz/exam";
 			}
 		}
