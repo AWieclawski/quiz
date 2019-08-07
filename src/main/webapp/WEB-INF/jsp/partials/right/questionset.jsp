@@ -12,7 +12,7 @@
 		<thead>
 
 			<tr>
-				<th colspan=2>${questionSet.question}</th>
+				<th colspan=2>${questionSet.question}?</th>
 			</tr>
 
 		</thead>
@@ -22,25 +22,25 @@
 			<tr>
 				<td colspan=1><input type="radio" name="submittedAnswer_Id"
 					value="1"></td>
-				<td>${questionSet.firstAnswer}</td>
+				<td>${questionSet.arrayOfAnswers[0]}</td>
 			</tr>
 
 			<tr>
 				<td colspan=1><input type="radio" name="submittedAnswer_Id"
 					value="2"></td>
-				<td>${questionSet.secondAnswer}</td>
+				<td>${questionSet.arrayOfAnswers[1]}</td>
 			</tr>
 
 			<tr>
 				<td colspan=1><input type="radio" name="submittedAnswer_Id"
 					value="3"></td>
-				<td>${questionSet.thirdAnswer}</td>
+				<td>${questionSet.arrayOfAnswers[2]}</td>
 			</tr>
 
 			<tr>
 				<td colspan=1><input type="radio" name="submittedAnswer_Id"
 					value="4"></td>
-				<td>${questionSet.fourthAnswer}</td>
+				<td>${questionSet.arrayOfAnswers[3]}</td>
 			</tr>
 
 		</tbody>

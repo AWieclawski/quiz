@@ -1,6 +1,5 @@
 package edu.awieclawski.quiz.controllers;
 
-//import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ import edu.awieclawski.quiz.models.QuestionSet;
 import edu.awieclawski.quiz.models.Test;
 import edu.awieclawski.quiz.repositories.QuestionSetRepository;
 import edu.awieclawski.quiz.services.ExamServices;
-
+import edu.awieclawski.quiz.services.QuizSetProxy;
 
 @Controller
 @RequestMapping(path = "/questionset")
@@ -34,8 +33,9 @@ public class QuestionSetController {
 
 	@Autowired
 	private QuestionSetRepository questionSetRepository;
-	
+
 	private ExamServices examServices;
+
 	@Autowired
 	public void setExamServices(ExamServices examServices) {
 		this.examServices = examServices;
@@ -45,7 +45,8 @@ public class QuestionSetController {
 	public String presentQuestionSets(
 			@ModelAttribute("errorMessage") String errorMessageReceived,
 			@ModelAttribute("infoMessage") String infoMessageReceived, 
-			HttpServletRequest request, ModelMap model) {
+			HttpServletRequest request, 
+			ModelMap model) {
 		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
 		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
 		HttpSession session = request.getSession(false);
@@ -53,14 +54,14 @@ public class QuestionSetController {
 		Test selectedTest = (Test) session.getAttribute("sessionTest");
 		logger.info(" ### selectedTest get from session: " + selectedTest.getTestName());
 
-		Integer currentQuestion = (Integer) session.getAttribute("currentQuestion") ;
-		
+		Integer currentQuestion = (Integer) session.getAttribute("currentQuestion");
+
 //		conditional initiation of question number & session attribute
 		if (currentQuestion == null) {
 			currentQuestion = 0;
 			session.setAttribute("currentQuestion", currentQuestion);
 		}
-		
+
 		logger.info(" $$$ currentQuestion: " + currentQuestion);
 
 		if (selectedTest != null) {
@@ -73,23 +74,28 @@ public class QuestionSetController {
 				int totalNumberOfQuestions = thisTestQestionSetsList.size();
 				logger.info(" $$$ totalNumberOfQuestions: " + totalNumberOfQuestions);
 				session.setAttribute("thisTestTotalNumberOfQuestions", totalNumberOfQuestions);
-				
+
 				QuestionSet thisTestQestionSet = thisTestQestionSetsList.get(currentQuestion);
-				
+
 				@SuppressWarnings("unchecked")
 				Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session
 						.getAttribute("thisTestSelectionsMap");
 				logger.info(" $$$ thisTestSelectionsMap: " + mapOfUserAnswers);
-				
-				// Initialization of 'nothing selected' user's answers map 
+
+				// Initialization of 'nothing selected' user's answers map
 				if (mapOfUserAnswers == null) {
-					mapOfUserAnswers = examServices.userSelectionsMapInit(totalNumberOfQuestions);
+					mapOfUserAnswers = examServices.userSelectionsMapInitialization(totalNumberOfQuestions);
 					logger.info(" $$$ userSelectionsMapInit: " + mapOfUserAnswers);
 					session.setAttribute("thisTestSelectionsMap", mapOfUserAnswers);
 				}
 
+				QuizSetProxy thisQuizSetProxy = examServices
+						.setQuestionAndAnswers(currentQuestion, thisTestQestionSetsList);
+				logger.info(" $$$ thisQuestionSet: " + thisQuizSetProxy);				
+				session.setAttribute("tthisQuestionSet", thisQuizSetProxy);
+
 				model.addAttribute("questionNumber", currentQuestion);
-				model.addAttribute("questionSet", thisTestQestionSet);
+				model.addAttribute("questionSet", thisQuizSetProxy);
 				model.addAttribute("thisTest", selectedTest);
 				model.addAttribute("results", mapOfUserAnswers);
 				model.addAttribute("resultsName", resultsName);
@@ -100,5 +106,5 @@ public class QuestionSetController {
 		return "redirect:/quiz/stepthird";
 
 	}
-	
+
 }

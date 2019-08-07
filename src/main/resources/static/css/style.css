@@ -4,12 +4,12 @@ html {
 
 body {
 	font-family: Arial, sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 	background-color: #111111;
 }
 
 .container {
-	width: 80%;
+	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
@@ -24,7 +24,7 @@ body {
 }
 
 #left {
-	width: 35%;
+	width: 30%;
 	float: left;
 	text-align: left;
 	height: 500px;
@@ -32,16 +32,22 @@ body {
 }
 
 #left .description {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #left strong {
 	color: #009999;
 }
 
+#left table {
+	padding: 10px;
+	margin: 0px 10px;
+	width: 90%;
+}
+
 #right {
-	width: 65%;
+	width: 70%;
 	float: left;
 	text-align: center;
 	height: 500px;
@@ -63,7 +69,7 @@ body {
 
 #right table {
 	padding: 10px;
-	margin: 0px 10px;
+	margin: 0px 20px;
 	width: 90%;
 }
 
@@ -132,7 +138,7 @@ ul.button-container li.right {
 	float: right;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
 	.menu ul.button-container li.right, .menu ul.button-container li {
 		float: none;
 	}
