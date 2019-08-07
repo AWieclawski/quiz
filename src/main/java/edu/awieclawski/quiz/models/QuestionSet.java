@@ -83,4 +83,13 @@ public class QuestionSet {
 	public void setTest(Test test) {
 		this.test = test;
 	}
+
+	@Override
+	public String toString() {
+		return "QuestionSet [questionSetId=" + questionSetId + ", question=" + question + ", firstAnswer=" + firstAnswer
+				+ ", secondAnswer=" + secondAnswer + ", thirdAnswer=" + thirdAnswer + ", fourthAnswer=" + fourthAnswer
+				+ ", correctAnswer=" + "not allowed" + ", test=" + test + "]";
+	}
+	
+	
 }

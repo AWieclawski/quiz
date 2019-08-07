@@ -49,10 +49,10 @@ public class TestController {
 		logger.info(" ### selectedDifficultyLevel get from session: " + selectedDifficultyLevel.toString());
 		Iterable<Test> resultsThatMeetSelectedCriteria = testRepository
 				.findTestsByTestTypeAndDifficultyLevel(selectedTestType, selectedDifficultyLevel);
+		logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + resultsThatMeetSelectedCriteria.toString());
 		model.addAttribute("results", resultsThatMeetSelectedCriteria);
 		model.addAttribute("resultsName", resultsName);
 		model.addAttribute("resultName", resultName);
-		logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + resultsThatMeetSelectedCriteria.toString());
 		return "/quiz/stepthird";
 	}
 
@@ -74,7 +74,8 @@ public class TestController {
 			logger.info(" *** sessionTest set to session: " + selectedTest.toString());
 			infoMessage = infoMessageInit.concat(selectedTest.getTestName());
 			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
-			return "redirect:/quiz/exam";
+//			return "redirect:/quiz/exam";
+			return "redirect:/questionset/exam";
 		} else {
 			errorMessage = errorMessageInit.concat(resultName).concat("!");
 			logger.info(" ^^^ errorMessage flash redirect: " + errorMessage);

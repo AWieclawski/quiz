@@ -139,9 +139,9 @@ ul.button-container li.right {
 }
 
 .infobar {
-	background-color: #aaaaaa;
+	background-color: #222222;
 	padding: 5px;
-	color: black;
+	color: white;
 }
 
 .commcell {
@@ -155,7 +155,7 @@ ul.button-container li.right {
 }
 
 .commcell span {
-	color: green;
+	color: #39ff14;
 }
 
 .logincell {
