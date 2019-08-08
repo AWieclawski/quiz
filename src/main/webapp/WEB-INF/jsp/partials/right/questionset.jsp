@@ -12,7 +12,7 @@
 		<thead>
 
 			<tr>
-				<th colspan=2>${questionSet.question}?</th>
+				<th colspan=2>${currentQuestionSet.question}?</th>
 			</tr>
 
 		</thead>
@@ -21,7 +21,7 @@
 		
 		   <c:set var="counter" value="0" />
 		
-		<c:forEach items="${questionSet.arrayOfAnswers}" var="thisQuestionAnswersArray">
+		<c:forEach items="${currentQuestionSet.arrayOfAnswers}" var="thisQuestionAnswersArray">
 
 			<tr>
 

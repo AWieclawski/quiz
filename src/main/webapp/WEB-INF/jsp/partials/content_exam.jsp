@@ -22,7 +22,7 @@
 
 	<h1>Exam</h1>
 
-	<h3>Test name: <strong>${thisTest.testName}</strong> | Question no: <strong>${questionSet.questionNumber+1}</strong></h3>
+	<h3>Test name: <strong>${thisTest.testName}</strong> | Question no: <strong>${currentQuestionNumber}</strong></h3>
 
 	<jsp:include page="../partials/right/questionset.jsp"></jsp:include>
 

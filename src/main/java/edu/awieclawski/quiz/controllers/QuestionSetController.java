@@ -19,7 +19,7 @@ import edu.awieclawski.quiz.models.QuestionSet;
 import edu.awieclawski.quiz.models.Test;
 import edu.awieclawski.quiz.repositories.QuestionSetRepository;
 import edu.awieclawski.quiz.services.ExamServices;
-import edu.awieclawski.quiz.services.QuizSetProxy;
+import edu.awieclawski.quiz.services.QuestionSetProxy;
 
 @Controller
 @RequestMapping(path = "/questionset")
@@ -30,9 +30,6 @@ public class QuestionSetController {
 	private String errorMessageInit = "Must select ";
 	private String resultsName = "question sets";
 	private String resultName = "guestion set";
-
-	@Autowired
-	private QuestionSetRepository questionSetRepository;
 
 	private ExamServices examServices;
 
@@ -58,7 +55,7 @@ public class QuestionSetController {
 
 //		conditional initiation of question number & session attribute
 		if (currentQuestion == null) {
-			currentQuestion = 0;
+			currentQuestion = 1;
 			session.setAttribute("currentQuestion", currentQuestion);
 		}
 
@@ -66,17 +63,19 @@ public class QuestionSetController {
 
 		if (selectedTest != null) {
 
-			List<QuestionSet> thisTestQestionSetsList = questionSetRepository.findQuestionSetsByTest(selectedTest);
-			logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + thisTestQestionSetsList.toString());
-//			session.setAttribute("thisTestQuestionSetsList", thisTestQestionSetsList);
+			List<QuestionSetProxy> thisTestQuestionSetsProxyList = 
+					examServices.questionSetProxyListSetup(selectedTest);
 
-			if (thisTestQestionSetsList.size() > 0) {
-				int totalNumberOfQuestions = thisTestQestionSetsList.size();
+			if (thisTestQuestionSetsProxyList.size() > 0) {
+				int totalNumberOfQuestions = thisTestQuestionSetsProxyList.size();
 				logger.info(" $$$ totalNumberOfQuestions: " + totalNumberOfQuestions);
 				session.setAttribute("thisTestTotalNumberOfQuestions", totalNumberOfQuestions);
-
-//				QuestionSet thisTestQestionSet = thisTestQestionSetsList.get(currentQuestion);
-
+				
+				QuestionSetProxy thisTestQestionSetProxy = thisTestQuestionSetsProxyList.get(currentQuestion-1);
+				logger.info(" $$$ thisTestQestionSetProxy: " + thisTestQestionSetProxy
+						+ ", $$$ currentQuestion: "+currentQuestion);
+				session.setAttribute("thisTestQuestionSet", thisTestQestionSetProxy);
+				
 				@SuppressWarnings("unchecked")
 				Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session
 						.getAttribute("thisTestSelectionsMap");
@@ -89,13 +88,8 @@ public class QuestionSetController {
 					session.setAttribute("thisTestSelectionsMap", mapOfUserAnswers);
 				}
 
-				QuizSetProxy thisQuizSetProxy = examServices
-						.setQuestionAndAnswers(currentQuestion, thisTestQestionSetsList);
-				logger.info(" $$$ thisQuestionSet: " + thisQuizSetProxy);				
-				session.setAttribute("tthisQuestionSet", thisQuizSetProxy);
-
-				model.addAttribute("questionNumber", currentQuestion);
-				model.addAttribute("questionSet", thisQuizSetProxy);
+				model.addAttribute("currentQuestionNumber", currentQuestion);
+				model.addAttribute("currentQuestionSet", thisTestQestionSetProxy);
 				model.addAttribute("thisTest", selectedTest);
 				model.addAttribute("results", mapOfUserAnswers);
 				model.addAttribute("resultsName", resultsName);

@@ -5,31 +5,31 @@ import java.util.Arrays;
 import org.springframework.stereotype.Component;
 
 /*
- * Stripped down proxy of QuestionSet without any correct answer
+ * Stripped down proxy of QuestionSet without correct answer, test type, difficulty level
  * 
 */
 @Component
-public class QuizSetProxy {
+public class QuestionSetProxy {
 
-	private int questionNumber;
+	private Integer questionNumber;
 	private String question;
 	private String[] arrayOfAnswers;
 
-	public QuizSetProxy(int questionNumber, String question, String[] arrayOfAnswers) {
+	public QuestionSetProxy(int questionNumber, String question, String[] arrayOfAnswers) {
 		this.questionNumber = questionNumber;
 		this.question = question;
 		this.arrayOfAnswers = arrayOfAnswers;
 	}
 
-	public QuizSetProxy() {
+	public QuestionSetProxy() {
 
 	}
 
-	public int getQuestionNumber() {
+	public Integer getQuestionNumber() {
 		return questionNumber;
 	}
 
-	public void setQuestionNumber(int questionNumber) {
+	public void setQuestionNumber(Integer questionNumber) {
 		this.questionNumber = questionNumber;
 	}
 
@@ -51,7 +51,7 @@ public class QuizSetProxy {
 
 	@Override
 	public String toString() {
-		return "QuizSetProxy{" + "questionNumber=" + questionNumber + ", question='" + question + '\''
+		return "QeustionSetProxy{" + "questionNumber=" + questionNumber + ", question='" + question + '\''
 				+ ", arrayOfAnswers=" + Arrays.toString(arrayOfAnswers) + '}';
 	}
 
