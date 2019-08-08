@@ -68,14 +68,14 @@ public class QuestionSetController {
 
 			List<QuestionSet> thisTestQestionSetsList = questionSetRepository.findQuestionSetsByTest(selectedTest);
 			logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + thisTestQestionSetsList.toString());
-			session.setAttribute("thisTestQuestionSetsList", thisTestQestionSetsList);
+//			session.setAttribute("thisTestQuestionSetsList", thisTestQestionSetsList);
 
 			if (thisTestQestionSetsList.size() > 0) {
 				int totalNumberOfQuestions = thisTestQestionSetsList.size();
 				logger.info(" $$$ totalNumberOfQuestions: " + totalNumberOfQuestions);
 				session.setAttribute("thisTestTotalNumberOfQuestions", totalNumberOfQuestions);
 
-				QuestionSet thisTestQestionSet = thisTestQestionSetsList.get(currentQuestion);
+//				QuestionSet thisTestQestionSet = thisTestQestionSetsList.get(currentQuestion);
 
 				@SuppressWarnings("unchecked")
 				Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session

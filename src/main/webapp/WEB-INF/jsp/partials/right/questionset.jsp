@@ -18,30 +18,23 @@
 		</thead>
 
 		<tbody>
+		
+		   <c:set var="counter" value="0" />
+		
+		<c:forEach items="${questionSet.arrayOfAnswers}" var="thisQuestionAnswersArray">
 
 			<tr>
+
 				<td colspan=1><input type="radio" name="submittedAnswer_Id"
-					value="1"></td>
-				<td>${questionSet.arrayOfAnswers[0]}</td>
+					value="${counter+1}"></td>
+
+				<td><c:out value="${thisQuestionAnswersArray}"  /></td>
+
 			</tr>
 
-			<tr>
-				<td colspan=1><input type="radio" name="submittedAnswer_Id"
-					value="2"></td>
-				<td>${questionSet.arrayOfAnswers[1]}</td>
-			</tr>
-
-			<tr>
-				<td colspan=1><input type="radio" name="submittedAnswer_Id"
-					value="3"></td>
-				<td>${questionSet.arrayOfAnswers[2]}</td>
-			</tr>
-
-			<tr>
-				<td colspan=1><input type="radio" name="submittedAnswer_Id"
-					value="4"></td>
-				<td>${questionSet.arrayOfAnswers[3]}</td>
-			</tr>
+			<c:set var="counter" value="${counter+1}" />   
+			
+			</c:forEach>
 
 		</tbody>
 
