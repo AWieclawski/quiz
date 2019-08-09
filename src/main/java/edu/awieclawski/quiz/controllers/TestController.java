@@ -38,9 +38,9 @@ public class TestController {
 			@ModelAttribute("infoMessage") String infoMessageReceived,
 			HttpServletRequest request, 
 			ModelMap model) {
+		HttpSession session = request.getSession(false);
 		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
 		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
-		HttpSession session = request.getSession(false);
 		TestType selectedTestType = (TestType) session.getAttribute("sessionTestType");
 		model.addAttribute("selectedTestType", selectedTestType);
 		logger.info(" ### sessionTestType get from session: " + selectedTestType.toString());
@@ -64,6 +64,11 @@ public class TestController {
 			HttpServletRequest request, 
 			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
+		//Reset session attributes after backward in http browser
+		session.removeAttribute("thisTestQuestionSetsProxyList");
+		session.removeAttribute("thisTestQuestionSet");
+		session.removeAttribute("thisTestSelectionsMap");
+		
 		String selectedTestIdToString = null;
 		selectedTestIdToString = request.getParameter("submittedTest_Id");
 

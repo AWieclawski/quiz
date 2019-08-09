@@ -10,4 +10,4 @@ from which the only one is correct. After the test, its result list is saved in 
 4. Process informations is buffered using session attributes, 
 5. Deployed with Tomcat server provided in one modular WAR executable package.
 
-#spring #boot #mvc #hibernate #jsp #sessionattributes
+#spring #boot #mvc #hibernate #jsp #jstl

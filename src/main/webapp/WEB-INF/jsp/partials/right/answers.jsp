@@ -6,6 +6,8 @@
 <div class="scrollable">
 
 	<table>
+	
+	<col width="10"><col width="30">
 
 		<thead>
 

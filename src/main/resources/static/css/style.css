@@ -43,7 +43,6 @@ body {
 }
 
 #left table {
-	padding: 10px;
 	margin: 0 auto;
 	width: 90%;
 }
@@ -64,6 +63,11 @@ body {
 	color: #009999;
 }
 
+p.warning {
+	text-align: center;
+	color: orange;
+}
+
 .scrollable {
 	height: 400px;
 	overflow: auto;
@@ -75,9 +79,8 @@ body {
 }
 
 #right table {
-	padding: 10px;
 	margin: 0 auto;
-	width: 90%;
+	width: 100%;
 }
 
 #right table thead {
@@ -218,9 +221,9 @@ label {
 	-webkit-appearance: button;
 	-moz-appearance: button;
 	-ms-appearance: button;
-	background: #333333;
+	background: #444444;
 	padding: 8px;
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 	text-align: center;
 	padding: 8px;

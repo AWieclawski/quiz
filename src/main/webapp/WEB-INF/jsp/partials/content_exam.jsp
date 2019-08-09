@@ -10,9 +10,25 @@
 
 		<h1>Answers</h1>
 
-		<h3>Selections (N/S - not selected)</h3>
+		<c:choose>
 
-		<jsp:include page="../partials/right/answers.jsp"></jsp:include>
+			<c:when test="${results==null}">
+
+				<p class="warning">
+					<b>No anticipated results.</b>
+				</p>
+
+			</c:when>
+
+			<c:otherwise>
+
+				<h3>Selections (N/S - not selected)</h3>
+
+				<jsp:include page="../partials/right/answers.jsp"></jsp:include>
+
+			</c:otherwise>
+
+		</c:choose>
 
 	</div>
 
@@ -24,11 +40,28 @@
 
 		<h1>Exam</h1>
 
-		<h3>
-			Test name: <strong>${thisTest.testName}</strong> | Question no: <strong>${currentQuestionNumber}</strong>
-		</h3>
+		<c:choose>
 
-		<jsp:include page="../partials/right/questionset.jsp"></jsp:include>
+			<c:when test="${currentQuestionSet==null}">
+
+				<p class="warning">
+					<b>No ${resultsName} to select. Search result is
+						empty.</b>
+				</p>
+
+			</c:when>
+
+			<c:otherwise>
+
+				<h3>
+					Test name: <strong>${thisTest.testName}</strong> | Question no: <strong>${currentQuestionNumber}</strong>
+				</h3>
+
+				<jsp:include page="../partials/right/questionset.jsp"></jsp:include>
+
+			</c:otherwise>
+
+		</c:choose>
 
 	</div>
 

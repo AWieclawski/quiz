@@ -5,41 +5,45 @@
 
 <div class="scrollable">
 
-	<table>
+	<form action="/questionset/exam" method="post">
 
-		<thead>
+		<table>
 
-			<tr>
-				<th colspan="1">${currentQuestionSet.question}?</th>
-			</tr>
-
-		</thead>
-
-		<tbody>
-
-			<c:set var="counter" value="0" />
-
-			<c:forEach items="${currentQuestionSet.arrayOfAnswers}"
-				var="thisQuestionAnswersArray">
+			<thead>
 
 				<tr>
-
-					<td colspan="1"><input type="radio" class="button"
-						name="submittedAnswer_Id"
-						id="<c:out value="${thisQuestionAnswersArray}"  />"
-						value="${counter+1}"></input> <label
-						for="<c:out value="${thisQuestionAnswersArray}"  />">
-						<c:out value="${thisQuestionAnswersArray}" /></label></td>
-
+					<th colspan="1">${currentQuestionSet.question}?</th>
 				</tr>
 
-				<c:set var="counter" value="${counter+1}" />
+			</thead>
 
-			</c:forEach>
+			<tbody>
 
-		</tbody>
+				<c:set var="counter" value="0" />
 
-	</table>
+				<c:forEach items="${currentQuestionSet.arrayOfAnswers}"
+					var="thisQuestionAnswersArray">
+
+					<tr>
+
+						<td colspan="1"><input type="radio" class="button"
+							name="submittedAnswer_Id"
+							id="<c:out value="${thisQuestionAnswersArray}"  />"
+							value="${counter+1}"></input> <label
+							for="<c:out value="${thisQuestionAnswersArray}"  />"> <c:out
+									value="${thisQuestionAnswersArray}" /></label></td>
+
+					</tr>
+
+					<c:set var="counter" value="${counter+1}" />
+
+				</c:forEach>
+
+			</tbody>
+
+		</table>
+
+	</form>
 
 </div>
 

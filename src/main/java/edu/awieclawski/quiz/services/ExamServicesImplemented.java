@@ -36,22 +36,28 @@ public class ExamServicesImplemented implements ExamServices {
 
 		// getQuestionSetsByTestList from data source
 		List<QuestionSet> thisList = getQuestionSetsByTestList(selectedTest);
-
+		logger.info(" %%% thisList generated in examServices: " + thisList.toString()
+		+", is empty? "+thisList.isEmpty());
 		List<QuestionSetProxy> questionSetProxyList = new ArrayList<>();
-		int orderNumberOfQuestion = 0;
-		int numberOfAnswers = 4;
+		
+		if (!thisList.isEmpty()) {
 
-		for (int i = 0; i < thisList.size(); i++) {
-			QuestionSet questionSet = thisList.get(i);
-			String[] options = getArrayOfAnswersFromQuestionSet(numberOfAnswers, questionSet);
-			orderNumberOfQuestion = i + 1;
-			QuestionSetProxy questionSetProxy = new QuestionSetProxy(orderNumberOfQuestion, questionSet.getQuestion(),
-					options);
+			int orderNumberOfQuestion = 0;
+			int numberOfAnswers = 4;
 
-			questionSetProxyList.add(questionSetProxy);
+			for (int i = 0; i < thisList.size(); i++) {
+				QuestionSet questionSet = thisList.get(i);
+				String[] options = getArrayOfAnswersFromQuestionSet(numberOfAnswers, questionSet);
+				orderNumberOfQuestion = i + 1;
+				QuestionSetProxy questionSetProxy = new QuestionSetProxy(orderNumberOfQuestion,
+						questionSet.getQuestion(), options);
+
+				questionSetProxyList.add(questionSetProxy);
+			}
+			logger.info(" ^^^ questionSetProxyList generated in examServices: " + questionSetProxyList.toString());
 		}
-		logger.info(" !!! questionSetProxyList generated in examServices: " + questionSetProxyList.toString());
 		return questionSetProxyList;
+//		return null;
 	}
 
 	private List<QuestionSet> getQuestionSetsByTestList(Test selectedTest) {

@@ -20,8 +20,8 @@ import edu.awieclawski.quiz.services.ExamServices;
 import edu.awieclawski.quiz.services.QuestionSetProxy;
 
 /*
- * Controller works only on not complete proxy of QuestionSet.
- * Correct answers, test type, difficulty level is NOT available nor in session, neither here.  
+ * Controller works only on striped down proxy of QuestionSet.
+ * Correct answers, test type, difficulty level are NOT available nor in session, neither here.  
 */
 @Controller
 @RequestMapping(path = "/questionset")
@@ -42,65 +42,94 @@ public class QuestionSetController {
 
 	@GetMapping(path = "/exam")
 	public String presentQuestionSets(
-			@ModelAttribute("errorMessage") String errorMessageReceived,
-			@ModelAttribute("infoMessage") String infoMessageReceived, 
+//			@ModelAttribute("errorMessage") String errorMessageReceived,
+//			@ModelAttribute("infoMessage") String infoMessageReceived, 
 			HttpServletRequest request, 
 			ModelMap model) {
-		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
-		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
+		
+//		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
+//		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
 		HttpSession session = request.getSession(false);
 
 		Test selectedTest = (Test) session.getAttribute("sessionTest");
-		logger.info(" ### selectedTest get from session: " + selectedTest.getTestName());
+		logger.info(" !!! selectedTest get from session: " + selectedTest);
 
 		Integer currentQuestion = (Integer) session.getAttribute("currentQuestion");
+		logger.info(" !!! currentQuestion  get from session: " + currentQuestion );
+		
+		QuestionSetProxy thisTestQuestionSetProxy = 
+				(QuestionSetProxy) session.getAttribute("thisTestQuestionSet");
+		logger.info(" !!! thisTestQestionSetProxy get from session: " + thisTestQuestionSetProxy
+				+ ", !!! currentQuestion  get from session: "+currentQuestion);
+
+		@SuppressWarnings("unchecked")
+		Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session
+		.getAttribute("thisTestSelectionsMap");
+		logger.info(" !!! thisTestSelectionsMap get from session: " + mapOfUserAnswers);
+		
+		Integer totalNumberOfQuestions = (Integer) session.getAttribute("thisTestTotalNumberOfQuestions");
+		logger.info(" !!! totalNumberOfQuestions get from session: " + totalNumberOfQuestions);
 
 //		conditional initiation of question number & session attribute
 		if (currentQuestion == null) {
 			currentQuestion = 1;
 			session.setAttribute("currentQuestion", currentQuestion);
+			logger.info(" ### currentQuestion: " + currentQuestion);
 		}
 
-		logger.info(" $$$ currentQuestion: " + currentQuestion);
 
 		if (selectedTest != null) {
 
 			List<QuestionSetProxy> thisTestQuestionSetsProxyList = 
 					examServices.questionSetProxyListSetup(selectedTest);
+			logger.info(" @@@ totalNumberOfQuestions: " + thisTestQuestionSetsProxyList);
 
 			if (thisTestQuestionSetsProxyList.size() > 0) {
-				int totalNumberOfQuestions = thisTestQuestionSetsProxyList.size();
-				logger.info(" $$$ totalNumberOfQuestions: " + totalNumberOfQuestions);
+				
+				if(totalNumberOfQuestions == null) {
+				totalNumberOfQuestions = thisTestQuestionSetsProxyList.size();
+				logger.info(" ### totalNumberOfQuestions setAttribute: " + totalNumberOfQuestions);
 				session.setAttribute("thisTestTotalNumberOfQuestions", totalNumberOfQuestions);
+				}
 				
-				QuestionSetProxy thisTestQestionSetProxy = thisTestQuestionSetsProxyList.get(currentQuestion-1);
-				logger.info(" $$$ thisTestQestionSetProxy: " + thisTestQestionSetProxy
-						+ ", $$$ currentQuestion: "+currentQuestion);
-				session.setAttribute("thisTestQuestionSet", thisTestQestionSetProxy);
+				// initialization of  thisTestQuestionSetProxy on start
+				if(thisTestQuestionSetProxy == null) {
+					thisTestQuestionSetProxy = thisTestQuestionSetsProxyList.get(currentQuestion-1);
+				logger.info(" $$$ thisTestQestionSetProxy setAttribute: " + thisTestQuestionSetProxy
+						+ ", $$$ currentQuestion setAttribute: "+currentQuestion);
+				session.setAttribute("thisTestQuestionSet", thisTestQuestionSetProxy);
+				}
 				
-				@SuppressWarnings("unchecked")
-				Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session
-						.getAttribute("thisTestSelectionsMap");
-				logger.info(" $$$ thisTestSelectionsMap: " + mapOfUserAnswers);
-
 				// Initialization of 'nothing selected' user's answers map
 				if (mapOfUserAnswers == null) {
 					mapOfUserAnswers = examServices.userSelectionsMapInitialization(totalNumberOfQuestions);
-					logger.info(" $$$ userSelectionsMapInit: " + mapOfUserAnswers);
+					logger.info(" $$$ userSelectionsMapInit setAttribute: " + mapOfUserAnswers);
 					session.setAttribute("thisTestSelectionsMap", mapOfUserAnswers);
 				}
 
-				model.addAttribute("currentQuestionNumber", currentQuestion);
-				model.addAttribute("currentQuestionSet", thisTestQestionSetProxy);
-				model.addAttribute("thisTest", selectedTest);
-				model.addAttribute("results", mapOfUserAnswers);
-				model.addAttribute("resultsName", resultsName);
-				model.addAttribute("resultName", resultName);
-				return "/quiz/exam";
 			} // end of the block, when list of questions is not empty
-		}
-		return "redirect:/quiz/stepthird";
 
+			model.addAttribute("currentQuestionNumber", currentQuestion);
+			logger.info(" *** currentQuestionNumber model: " + currentQuestion);
+			
+			model.addAttribute("currentQuestionSet", thisTestQuestionSetProxy);
+			logger.info(" *** currentQuestionSet model: " + thisTestQuestionSetProxy);
+			
+			model.addAttribute("thisTest", selectedTest);
+			logger.info(" *** thisTest model: " + selectedTest);
+			
+			model.addAttribute("results", mapOfUserAnswers);
+			logger.info(" *** results model: " + mapOfUserAnswers);
+			
+			model.addAttribute("resultsName", resultsName);
+			logger.info(" *** resultsName model: " + resultsName);
+			
+			model.addAttribute("resultName", resultName);
+			logger.info(" *** resultName model: " + resultName);
+			
+		}
+		
+		return "/quiz/exam";
 	}
 
 }

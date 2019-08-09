@@ -34,6 +34,7 @@ public class TestTypeController {
 	public String presentTestTypes(
 			@ModelAttribute("errorMessage") String errorMessageReceived,
 			@ModelAttribute("infoMessage") String infoMessageReceived,
+			HttpServletRequest request,
 			ModelMap model) {
 		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
 		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
@@ -51,7 +52,12 @@ public class TestTypeController {
 			HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
-		if (session == null) {
+		//Reset session attributes after restart quiz from menu
+		session.removeAttribute("thisTestQuestionSetsProxyList");
+		session.removeAttribute("thisTestQuestionSet");
+		session.removeAttribute("thisTestSelectionsMap");
+		
+		if (session.equals(null)) {
 			session = request.getSession();
 		}
         String selectedTestTypeIdToString = null;
