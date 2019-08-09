@@ -7,33 +7,34 @@
 
 	<table>
 
-		<col width="10">
-
 		<thead>
 
 			<tr>
-				<th colspan=2>${currentQuestionSet.question}?</th>
+				<th colspan="1">${currentQuestionSet.question}?</th>
 			</tr>
 
 		</thead>
 
 		<tbody>
-		
-		   <c:set var="counter" value="0" />
-		
-		<c:forEach items="${currentQuestionSet.arrayOfAnswers}" var="thisQuestionAnswersArray">
 
-			<tr>
+			<c:set var="counter" value="0" />
 
-				<td colspan=1><input type="radio" name="submittedAnswer_Id"
-					value="${counter+1}"></td>
+			<c:forEach items="${currentQuestionSet.arrayOfAnswers}"
+				var="thisQuestionAnswersArray">
 
-				<td><c:out value="${thisQuestionAnswersArray}"  /></td>
+				<tr>
 
-			</tr>
+					<td colspan="1"><input type="radio" class="button"
+						name="submittedAnswer_Id"
+						id="<c:out value="${thisQuestionAnswersArray}"  />"
+						value="${counter+1}"></input> <label
+						for="<c:out value="${thisQuestionAnswersArray}"  />">
+						<c:out value="${thisQuestionAnswersArray}" /></label></td>
 
-			<c:set var="counter" value="${counter+1}" />   
-			
+				</tr>
+
+				<c:set var="counter" value="${counter+1}" />
+
 			</c:forEach>
 
 		</tbody>

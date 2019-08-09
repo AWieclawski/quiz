@@ -97,7 +97,7 @@ public class QuestionSetController {
 				model.addAttribute("resultsName", resultsName);
 				model.addAttribute("resultName", resultName);
 				return "/quiz/exam";
-			}
+			} // end of the block, when list of questions is not empty
 		}
 		return "redirect:/quiz/stepthird";
 

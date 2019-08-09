@@ -10,9 +10,7 @@ body {
 
 .container {
 	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
+	margin: 0 auto;
 	padding: 0px;
 }
 
@@ -24,7 +22,7 @@ body {
 }
 
 #left {
-	width: 30%;
+	width: 25%;
 	float: left;
 	text-align: left;
 	height: 500px;
@@ -32,29 +30,31 @@ body {
 }
 
 .description {
-	margin-left: auto;
-	margin-right: auto;
-	width:90%;
+	margin: 0 auto;
+	width: 90%;
 }
 
 #left strong {
 	color: #009999;
 }
 
+#left h1 {
+	text-align: center;
+}
+
 #left table {
 	padding: 10px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
 	width: 90%;
 }
 
 #left table th, td {
 	padding: 10px;
-	text-align: left;
+	text-align: center;
 }
 
 #right {
-	width: 70%;
+	width: 75%;
 	float: left;
 	text-align: center;
 	height: 500px;
@@ -70,14 +70,13 @@ body {
 }
 
 #right table th, td {
-	padding: 10px;
-	text-align: left;
+	padding: 2px;
+	text-align: center;
 }
 
 #right table {
 	padding: 10px;
-	margin-lef: auto;
-	margin-right: auto;
+	margin: 0 auto;
 	width: 90%;
 }
 
@@ -86,13 +85,17 @@ body {
 }
 
 #right table tbody tr:hover {
-	background-color: #111111;
 	color: yellow;
 }
 
-#right table tbody tr.selected {
+#right table tbody label:hover {
+	color: yellow;
+	background: black;
+}
+
+#right table input:hover {
 	background-color: black;
-	color: white;
+	color: yellow;
 }
 
 .footer {
@@ -122,7 +125,6 @@ body {
 	padding: 0;
 	overflow: hidden;
 	background-color: #555555;
-	font-size: 14px;
 }
 
 .menu ul.button-container li {
@@ -189,16 +191,37 @@ ul.button-container li.right {
 	clear: both;
 }
 
-p {
-	font-size: 14px;
-}
-
 .in_the_middle_400 {
-	margin-right: auto;
-	margin-left: auto;
+	margin: 0 auto;
 	line-height: 400px;
 }
 
 .in_the_middle_400 img {
 	vertical-align: middle;
+}
+
+/*----------------------------------
+        SIDEBAR
+        ----------------------------------*/
+input[type=radio], input[type=checkbox] {
+	display: none;
+}
+
+form input[type="radio"]:checked+label {
+	background-color: #111111;
+	color: white;
+}
+
+label {
+	display: block;
+	appearance: button;
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	-ms-appearance: button;
+	background: #333333;
+	padding: 8px;
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	padding: 8px;
 }

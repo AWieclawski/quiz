@@ -8,11 +8,9 @@
 
 		<table>
 
-			<col width="10">
-
 			<thead>
 				<tr>
-					<th colspan=2><input type="submit" value="Confirm&NextStep">
+					<th colspan="1"><input type="submit" value="Confirm&NextStep">
 						<input type="reset" value="Reset"></th>
 				</tr>
 			</thead>
@@ -22,10 +20,13 @@
 				<c:forEach items="${results}" var="difficultyLevel">
 
 					<tr>
-						<td colspan=1><input type="radio"
+
+						<td colspan="1"><input type="radio" class="button"
 							name="submittedDifficultyLevel_Id"
-							value="${difficultyLevel.difficultyLevelId}"></td>
-						<td>${difficultyLevel.difficultyLevelName}</td>
+							id="${difficultyLevel.difficultyLevelName}"
+							value="${difficultyLevel.difficultyLevelId}"></input> <label
+							for="${difficultyLevel.difficultyLevelName}">${difficultyLevel.difficultyLevelName}</label></td>
+
 					</tr>
 
 				</c:forEach>

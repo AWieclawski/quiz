@@ -8,11 +8,9 @@
 
 		<table>
 
-			<col width="10">
-
 			<thead>
 				<tr>
-					<th colspan="2"><input type="submit" value="Confirm&NextStep">
+					<th colspan="1"><input type="submit" value="Confirm&NextStep">
 						<input type="reset" value="Reset"></th>
 				</tr>
 			</thead>
@@ -22,9 +20,12 @@
 				<c:forEach items="${results}" var="testType">
 
 					<tr>
-						<td colspan=1><input type="radio" name="submittedTestType_Id"
-							value="${testType.testTypeId}"></td>
-						<td>${testType.testTypeName}</td>
+
+						<td colspan="1"><input type="radio" class="button"
+							id="${testType.testTypeName}" name="submittedTestType_Id"
+							value="${testType.testTypeId}"></input> <label
+							for="${testType.testTypeName}">${testType.testTypeName}</label></td>
+
 					</tr>
 
 				</c:forEach>

@@ -18,8 +18,14 @@
 
 <div id="right">
 
-	<div class="in_the_middle_400">
-		<img src="/img/question-2.png" height="250">
+	<div class="description">
+
+		<div class="in_the_middle_400">
+
+			<img src="/img/question-2.png" height="250">
+
+		</div>
+
 	</div>
 
 </div>

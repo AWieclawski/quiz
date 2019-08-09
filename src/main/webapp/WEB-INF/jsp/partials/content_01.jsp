@@ -22,25 +22,29 @@
 
 <div id="right">
 
-	<h1>Available ${resultsName}:</h1>
+	<div class="description">
 
-	<c:choose>
+		<h1>Available ${resultsName}:</h1>
 
-		<c:when test="${results==null}">
-		
-			<p>
-				<strong>No ${resultsName} to select. Search result is
-					empty.</strong>
-			</p>
+		<c:choose>
 
-		</c:when>
+			<c:when test="${results==null}">
 
-		<c:otherwise>
+				<p>
+					<strong>No ${resultsName} to select. Search result is
+						empty.</strong>
+				</p>
 
-			<jsp:include page="../partials/right/testtypes.jsp"></jsp:include>
+			</c:when>
 
-		</c:otherwise>
+			<c:otherwise>
 
-	</c:choose>
+				<jsp:include page="../partials/right/testtypes.jsp"></jsp:include>
+
+			</c:otherwise>
+
+		</c:choose>
+
+	</div>
 
 </div>

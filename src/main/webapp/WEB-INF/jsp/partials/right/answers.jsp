@@ -7,8 +7,6 @@
 
 	<table>
 
-		<col width="10">
-
 		<thead>
 
 			<tr>

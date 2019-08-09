@@ -8,23 +8,28 @@
 
 		<table>
 
-			<col width="10">
-		 
-					<thead>
+			<thead>
+
 				<tr>
-					<th colspan=2><input type="submit" value="Confirm&NextStep">
+
+					<th colspan="1"><input type="submit" value="Confirm&NextStep">
 						<input type="reset" value="Reset"></th>
+
 				</tr>
-			</thead>	 
+
+			</thead>
 
 			<tbody>
 
 				<c:forEach items="${results}" var="test">
 
 					<tr>
-						<td colspan=1><input type="radio" name="submittedTest_Id"
-							value="${test.testId}"></td>
-						<td>${test.testName}</td>
+
+						<td colspan="1"><input type="radio" class="button"
+							name="submittedTest_Id" value="${test.testId}"
+							id="${test.testName}"></input><label for="${test.testName}">
+								${test.testName}</label></td>
+
 					</tr>
 
 				</c:forEach>
