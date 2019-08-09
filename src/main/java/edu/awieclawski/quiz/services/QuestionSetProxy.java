@@ -22,7 +22,13 @@ public class QuestionSetProxy {
 	}
 
 	public QuestionSetProxy() {
-
+	}
+	
+	public QuestionSetProxy(Integer questionNumber, String question, String[] arrayOfAnswers) {
+		super();
+		this.questionNumber = questionNumber;
+		this.question = question;
+		this.arrayOfAnswers = arrayOfAnswers;
 	}
 
 	public Integer getQuestionNumber() {

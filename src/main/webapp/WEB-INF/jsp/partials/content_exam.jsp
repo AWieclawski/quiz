@@ -9,8 +9,8 @@
 	<div class="description">
 
 		<h1>Answers</h1>
-		
-		<h3>User's selections</h3>
+
+		<h3>Selections (N/S - not selected)</h3>
 
 		<jsp:include page="../partials/right/answers.jsp"></jsp:include>
 
@@ -20,10 +20,16 @@
 
 <div id="right">
 
-	<h1>Exam</h1>
+	<div class="description">
 
-	<h3>Test name: <strong>${thisTest.testName}</strong> | Question no: <strong>${currentQuestionNumber}</strong></h3>
+		<h1>Exam</h1>
 
-	<jsp:include page="../partials/right/questionset.jsp"></jsp:include>
+		<h3>
+			Test name: <strong>${thisTest.testName}</strong> | Question no: <strong>${currentQuestionNumber}</strong>
+		</h3>
+
+		<jsp:include page="../partials/right/questionset.jsp"></jsp:include>
+
+	</div>
 
 </div>

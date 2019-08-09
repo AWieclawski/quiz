@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.awieclawski.quiz.models.QuestionSet;
 import edu.awieclawski.quiz.models.Test;
-import edu.awieclawski.quiz.repositories.QuestionSetRepository;
 import edu.awieclawski.quiz.services.ExamServices;
 import edu.awieclawski.quiz.services.QuestionSetProxy;
 
+/*
+ * Controller works only on not complete proxy of QuestionSet.
+ * Correct answers, test type, difficulty level is NOT available nor in session, neither here.  
+*/
 @Controller
 @RequestMapping(path = "/questionset")
 public class QuestionSetController {

@@ -31,9 +31,10 @@ body {
 	background-color: #444444;
 }
 
-#left .description {
-	padding-left: 20px;
-	padding-right: 20px;
+.description {
+	margin-left: auto;
+	margin-right: auto;
+	width:90%;
 }
 
 #left strong {
@@ -42,8 +43,14 @@ body {
 
 #left table {
 	padding: 10px;
-	margin: 0px 10px;
+	margin-left: auto;
+	margin-right: auto;
 	width: 90%;
+}
+
+#left table th, td {
+	padding: 10px;
+	text-align: left;
 }
 
 #right {
@@ -69,7 +76,8 @@ body {
 
 #right table {
 	padding: 10px;
-	margin: 0px 20px;
+	margin-lef: auto;
+	margin-right: auto;
 	width: 90%;
 }
 

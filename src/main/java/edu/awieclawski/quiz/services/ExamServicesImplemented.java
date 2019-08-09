@@ -24,10 +24,9 @@ public class ExamServicesImplemented implements ExamServices {
 
 	@Override
 	public Map<Integer, String> userSelectionsMapInitialization(int sizeQuestionSets) {
-
 		Map<Integer, String> selections = new HashMap<>();
 		for (int i = 0; i < sizeQuestionSets; i++) {
-			selections.put(i, "Not selected");
+			selections.put(i, "N/S");
 		}
 		return selections;
 	}
@@ -35,53 +34,39 @@ public class ExamServicesImplemented implements ExamServices {
 	@Override
 	public List<QuestionSetProxy> questionSetProxyListSetup(Test selectedTest) {
 
+		// getQuestionSetsByTestList from data source
 		List<QuestionSet> thisList = getQuestionSetsByTestList(selectedTest);
 
-		QuestionSetProxy questionSetProxy = new QuestionSetProxy();
 		List<QuestionSetProxy> questionSetProxyList = new ArrayList<>();
-
 		int orderNumberOfQuestion = 0;
 		int numberOfAnswers = 4;
 
 		for (int i = 0; i < thisList.size(); i++) {
 			QuestionSet questionSet = thisList.get(i);
 			String[] options = getArrayOfAnswersFromQuestionSet(numberOfAnswers, questionSet);
-
 			orderNumberOfQuestion = i + 1;
+			QuestionSetProxy questionSetProxy = new QuestionSetProxy(orderNumberOfQuestion, questionSet.getQuestion(),
+					options);
 
-			questionSetProxy.setQuestionNumber(orderNumberOfQuestion);
-			questionSetProxy.setQuestion(questionSet.getQuestion());
-			questionSetProxy.setArrayOfAnswers(options);
-
-			logger.info(" !!! questionSetProxy " + questionSetProxy.toString());
 			questionSetProxyList.add(questionSetProxy);
-			logger.info(" !!! questionSetProxyList " + questionSetProxyList.toString());
 		}
-
+		logger.info(" !!! questionSetProxyList generated in examServices: " + questionSetProxyList.toString());
 		return questionSetProxyList;
-
 	}
 
 	private List<QuestionSet> getQuestionSetsByTestList(Test selectedTest) {
-
 		List<QuestionSet> thisList = questionSetRepository.findQuestionSetsByTest(selectedTest);
-		logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + thisList.toString());
-
+//		logger.info(" !!! resultsThatMeetSelectedCriteria enumeration obtained in examServices: " + thisList.toString());
 		return thisList;
-
 	}
 
 	private String[] getArrayOfAnswersFromQuestionSet(int numberOfAnswers, QuestionSet questionSet) {
-
 		String[] options = new String[numberOfAnswers];
-
 		options[0] = questionSet.getFirstAnswer();
 		options[1] = questionSet.getSecondAnswer();
 		options[2] = questionSet.getThirdAnswer();
 		options[3] = questionSet.getFourthAnswer();
-
 		return options;
-
 	}
 
 }

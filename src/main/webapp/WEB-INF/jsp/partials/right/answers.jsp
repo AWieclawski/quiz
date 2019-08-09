@@ -9,6 +9,18 @@
 
 		<col width="10">
 
+		<thead>
+
+			<tr>
+
+				<th>No</th>
+				
+				<th>Answer</th>
+
+			</tr>
+
+		</thead>
+
 		<tbody>
 
 			<c:forEach items="${results}" var="thisTestSelection">
