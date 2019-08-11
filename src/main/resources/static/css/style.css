@@ -45,6 +45,13 @@ body {
 #left table {
 	margin: 0 auto;
 	width: 90%;
+	border-collapse: collapse;
+	border: 0;
+}
+
+#left table tbody tr:hover {
+	color: yellow;
+	background-color: #111111;
 }
 
 #left table th, td {
@@ -81,6 +88,8 @@ p.warning {
 #right table {
 	margin: 0 auto;
 	width: 100%;
+	border-collapse: collapse;
+	border: 0;
 }
 
 #right table thead {
@@ -96,9 +105,14 @@ p.warning {
 	background: black;
 }
 
-#right table input:hover {
+#right form input:hover {
 	background-color: black;
 	color: yellow;
+}
+
+#right form button:hover {
+	background-color: #004444;
+	color: #aaaaaa;
 }
 
 .footer {
@@ -217,13 +231,9 @@ form input[type="radio"]:checked+label {
 
 label {
 	display: block;
-	appearance: button;
-	-webkit-appearance: button;
-	-moz-appearance: button;
-	-ms-appearance: button;
 	background: #444444;
 	padding: 8px;
-	width: 100%;
+	width: 90%;
 	margin: 0 auto;
 	text-align: center;
 	padding: 8px;

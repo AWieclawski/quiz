@@ -6,15 +6,16 @@
 <div class="scrollable">
 
 	<table>
-	
-	<col width="10"><col width="30">
+
+		<col width="10">
+		<col width="30">
 
 		<thead>
 
 			<tr>
 
 				<th>No</th>
-				
+
 				<th>Answer</th>
 
 			</tr>
@@ -38,5 +39,7 @@
 		</tbody>
 
 	</table>
+
+	(N/S - not selected)
 
 </div>

@@ -22,7 +22,7 @@
 
 			<c:otherwise>
 
-				<h3>Selections (N/S - not selected)</h3>
+				<h3>Selections</h3>
 
 				<jsp:include page="../partials/right/answers.jsp"></jsp:include>
 
@@ -45,8 +45,7 @@
 			<c:when test="${currentQuestionSet==null}">
 
 				<p class="warning">
-					<b>No ${resultsName} to select. Search result is
-						empty.</b>
+					<b>No ${resultsName} to select. Search result is empty.</b>
 				</p>
 
 			</c:when>

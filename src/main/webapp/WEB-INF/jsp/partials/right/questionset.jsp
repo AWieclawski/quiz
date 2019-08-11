@@ -31,7 +31,8 @@
 							id="<c:out value="${thisQuestionAnswersArray}"  />"
 							value="${counter+1}"></input> <label
 							for="<c:out value="${thisQuestionAnswersArray}"  />"> <c:out
-									value="${thisQuestionAnswersArray}" /></label></td>
+									value="${thisQuestionAnswersArray}" />(${counter+1})
+						</label></td>
 
 					</tr>
 
@@ -42,6 +43,25 @@
 			</tbody>
 
 		</table>
+
+		<c:if test="${currentQuestionNumber > 1}">
+
+			<button type="submit" name="action" value="previous">Previous</button>
+
+		</c:if>
+
+		<c:if
+			test="${currentQuestionNumber < currentTestTotalNumberOfQuestions}">
+
+			<button type="submit" name="action" value="next">Next</button>
+
+		</c:if>
+		<br> <br>
+
+		<div id="finish">
+			<button type="submit" name="action" value="finishExam">Finish
+				exam</button>
+		</div>
 
 	</form>
 
