@@ -46,5 +46,16 @@ public class QuizController {
 		redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
 		return "forward:/test/thirdstep";
 	}
+	
+	@GetMapping(path = "/exam")
+	public String redirectToExam(
+			@ModelAttribute("errorMessage") String errorMessage,
+			@ModelAttribute("infoMessage") String infoMessage, 
+			ModelMap model, 
+			RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+		redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
+		return "forward:/questionset/exam";
+	}
 
 }

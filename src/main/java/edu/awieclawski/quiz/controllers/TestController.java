@@ -78,9 +78,10 @@ public class TestController {
 			session.setAttribute("sessionTest", selectedTest);
 			logger.info(" *** sessionTest set to session: " + selectedTest.toString());
 			infoMessage = infoMessageInit.concat(selectedTest.getTestName());
+			redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
 			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
-//			return "redirect:/quiz/exam";
-			return "redirect:/questionset/exam";
+			return "redirect:/quiz/exam";
+//			return "redirect:/questionset/exam";
 		} else {
 			errorMessage = errorMessageInit.concat(resultName).concat("!");
 			logger.info(" ^^^ errorMessage flash redirect: " + errorMessage);

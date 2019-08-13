@@ -25,13 +25,14 @@ import edu.awieclawski.quiz.services.QuestionSetProxy;
  * Controller works only on striped down proxy of QuestionSet.
  * Correct answers, test type, difficulty level are NOT available nor in session, neither here.  
 */
+
 @Controller
 @RequestMapping(path = "/questionset")
 public class QuestionSetController {
 
 	private static final Logger logger = LogManager.getLogger(QuestionSetController.class.getName());
 	private String infoMessageInit = "OK. Selected: ";
-	private String errorMessageInit = "Must select ";
+	private String errorMessageInit = "Select ";
 	private String resultsName = "question sets";
 	private String resultName = "guestion set";
 
@@ -129,14 +130,13 @@ public class QuestionSetController {
 
 		}
 
-		return "/quiz/exam";
+		return "/quiz/exampresentation";
 	}
 
 	@PostMapping(path = "/exam")
-	public String selectQuestionSets(
-//			@ModelAttribute("errorMessage") String errorMessage,
-//			@ModelAttribute("infoMessage") String infoMessage,
-			ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public String selectQuestionSets(@ModelAttribute("errorMessage") String errorMessage,
+			@ModelAttribute("infoMessage") String infoMessage, ModelMap model, HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
 
 //		boolean finish = false;
@@ -166,7 +166,7 @@ public class QuestionSetController {
 
 			String action = request.getParameter("action");
 			String radio = request.getParameter("submittedAnswer_Id");
-			String selectedRadio = "Not selected";
+			String selectedRadio = "N/S";
 			// TODO replace quizUserId value by session attribute after login functionality
 			// added
 			String quizUserId = "testUserId";
@@ -175,11 +175,10 @@ public class QuestionSetController {
 
 			if (radio != null) {
 				selectedRadio = radioTest(radio, numberOfRadioSamples);
+				mapOfUserAnswers.replace(currentQuestion.intValue() - 1, selectedRadio);
+				logger.info(" === User id: " + quizUserId + " selected answer: " + selectedRadio + " in question no: "
+						+ currentQuestion);
 			}
-
-			mapOfUserAnswers.replace(currentQuestion.intValue() - 1, selectedRadio);
-			logger.info(" === User id: " + quizUserId + " selected answer: " + selectedRadio + " in question no: "
-					+ currentQuestion);
 
 			if ("next".equals(action)) {
 				currentQuestion++;
@@ -190,7 +189,7 @@ public class QuestionSetController {
 				return "redirect:/questionset/exam";
 			}
 
-			logger.trace(
+			logger.info(
 					" +++ User id: " + quizUserId + " clicked Next Button " + "to go question no: " + currentQuestion);
 			session.setAttribute("currentQuestion", currentQuestion);
 
@@ -202,13 +201,15 @@ public class QuestionSetController {
 			logger.info(" +++  userSelectionsMap change setAttribute: " + mapOfUserAnswers);
 			session.setAttribute("thisTestSelectionsMap", mapOfUserAnswers);
 
-			return "redirect:/questionset/exam";
+			infoMessage = infoMessageInit.concat(selectedRadio).concat(" answer of question ").concat(currentQuestion.toString());
+			redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
+			return "redirect:/quiz/exam";
 
 		} else {
-//		errorMessage = errorMessageInit.concat(resultName).concat("!");
-//		logger.info(" ^^^ errorMessage flash redirect: " + errorMessage);
-//		redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
-			return "redirect:/quiz/firststep";
+			errorMessage = errorMessageInit.concat(resultName).concat("!");
+			logger.info(" ^^^ errorMessage flash redirect: " + errorMessage);
+			redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+			return "redirect:/quiz/exam";
 		}
 	}
 
