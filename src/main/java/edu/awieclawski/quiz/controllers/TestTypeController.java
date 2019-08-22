@@ -69,7 +69,6 @@ public class TestTypeController {
 			session.setAttribute("sessionTestType", selectedTestType);
 			logger.info(" *** sessionTestType set to session: " + selectedTestType.toString());
 			infoMessage = infoMessageInit.concat(selectedTestType.getTestTypeName());
-			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
 			redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
 			return "redirect:/quiz/secondstep";
 		} else {

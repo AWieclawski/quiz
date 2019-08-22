@@ -15,11 +15,11 @@ public class QuestionSetProxy {
 	private String question;
 	private String[] arrayOfAnswers;
 
-	public QuestionSetProxy(int questionNumber, String question, String[] arrayOfAnswers) {
-		this.questionNumber = questionNumber;
-		this.question = question;
-		this.arrayOfAnswers = arrayOfAnswers;
-	}
+//	public QuestionSetProxy(int questionNumber, String question, String[] arrayOfAnswers) {
+//		this.questionNumber = questionNumber;
+//		this.question = question;
+//		this.arrayOfAnswers = arrayOfAnswers;
+//	}
 
 	public QuestionSetProxy() {
 	}

@@ -43,13 +43,10 @@ public class TestController {
 		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
 		TestType selectedTestType = (TestType) session.getAttribute("sessionTestType");
 		model.addAttribute("selectedTestType", selectedTestType);
-		logger.info(" ### sessionTestType get from session: " + selectedTestType.toString());
 		DifficultyLevel selectedDifficultyLevel = (DifficultyLevel) session.getAttribute("sessionDifficultyLevel");
 		model.addAttribute("selectedDifficultyLevel", selectedDifficultyLevel);
-		logger.info(" ### selectedDifficultyLevel get from session: " + selectedDifficultyLevel.toString());
 		Iterable<Test> resultsThatMeetSelectedCriteria = testRepository
 				.findTestsByTestTypeAndDifficultyLevel(selectedTestType, selectedDifficultyLevel);
-		logger.info(" $$$ resultsThatMeetSelectedCriteria enumeration: " + resultsThatMeetSelectedCriteria.toString());
 		model.addAttribute("results", resultsThatMeetSelectedCriteria);
 		model.addAttribute("resultsName", resultsName);
 		model.addAttribute("resultName", resultName);
@@ -79,7 +76,6 @@ public class TestController {
 			logger.info(" *** sessionTest set to session: " + selectedTest.toString());
 			infoMessage = infoMessageInit.concat(selectedTest.getTestName());
 			redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
-			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
 			return "redirect:/quiz/exam";
 //			return "redirect:/questionset/exam";
 		} else {

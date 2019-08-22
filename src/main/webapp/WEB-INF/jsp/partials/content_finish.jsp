@@ -18,7 +18,28 @@
 
 	<div class="description">
 
-		<h1>Finish</h1>
+		<h1>Results</h1>
+
+		<c:choose>
+
+			<c:when test="${results==null}">
+
+				<p class="warning">
+					<b>No anticipated results.</b>
+				</p>
+
+			</c:when>
+
+			<c:otherwise>
+
+				<h3>Selections</h3>
+
+				<jsp:include page="../partials/right/results.jsp"></jsp:include>
+
+			</c:otherwise>
+
+		</c:choose>
+
 
 	</div>
 

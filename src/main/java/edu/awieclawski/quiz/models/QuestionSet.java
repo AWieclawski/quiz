@@ -88,8 +88,9 @@ public class QuestionSet {
 	public String toString() {
 		return "QuestionSet [questionSetId=" + questionSetId + ", question=" + question + ", firstAnswer=" + firstAnswer
 				+ ", secondAnswer=" + secondAnswer + ", thirdAnswer=" + thirdAnswer + ", fourthAnswer=" + fourthAnswer
-				+ ", correctAnswer=" + "not allowed" + ", test=" + test + "]";
+				+ ", correctAnswer=" + "not allowed"
+//				+ ", correctAnswer=" + correctAnswer 
+				+ ", test=" + test + "]";
 	}
-	
-	
+
 }

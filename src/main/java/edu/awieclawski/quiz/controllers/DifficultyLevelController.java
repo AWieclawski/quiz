@@ -42,7 +42,6 @@ public class DifficultyLevelController {
 		HttpSession session = request.getSession(false);
 		TestType selectedTestType = (TestType) session.getAttribute("sessionTestType");
 		model.addAttribute("selectedTestType", selectedTestType);
-		logger.info(" ### selectedTestType get from session: " + selectedTestType);
 		model.addAttribute("results", difficultyLevelRepository.findAll());
 		model.addAttribute("resultsName", resultsName);
 		model.addAttribute("resultName", resultName);
@@ -68,7 +67,6 @@ public class DifficultyLevelController {
 			session.setAttribute("sessionDifficultyLevel", selectedDifficultyLevel);
 			logger.info(" *** sessionDifficultyLevel set to session: " + selectedDifficultyLevel.toString());
 			infoMessage = infoMessageInit.concat(selectedDifficultyLevel.getDifficultyLevelName());
-			logger.info(" ^^^ infoMessage flash redirect: " + infoMessage);
 			redirectAttributes.addFlashAttribute("infoMessage", infoMessage);
 			return "redirect:/quiz/thirdstep";
 		} else {

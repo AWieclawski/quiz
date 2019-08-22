@@ -36,10 +36,8 @@ public class ExamServicesImplemented implements ExamServices {
 
 		// getQuestionSetsByTestList from data source
 		List<QuestionSet> thisList = getQuestionSetsByTestList(selectedTest);
-		logger.info(" %%% thisList generated in examServices: " + thisList.toString()
-		+", is empty? "+thisList.isEmpty());
 		List<QuestionSetProxy> questionSetProxyList = new ArrayList<>();
-		
+
 		if (!thisList.isEmpty()) {
 
 			int orderNumberOfQuestion = 0;
@@ -54,15 +52,39 @@ public class ExamServicesImplemented implements ExamServices {
 
 				questionSetProxyList.add(questionSetProxy);
 			}
-			logger.info(" ^^^ questionSetProxyList generated in examServices: " + questionSetProxyList.toString());
 		}
 		return questionSetProxyList;
-//		return null;
+	}
+
+	@Override
+	public List<TestRecapitulation> userSelectionsMapVerification(Test selectedTest,
+			Map<Integer, String> mapOfUserAnswers) {
+		List<QuestionSet> thisList = getQuestionSetsByTestList(selectedTest);
+		List<TestRecapitulation> userSelectionsVerificationResults = new ArrayList<TestRecapitulation>();
+		if (!thisList.isEmpty()) {
+			for (int i = 0; i < thisList.size(); i++) {
+				QuestionSet questionSet = thisList.get(i);
+				TestRecapitulation verificatedResult = new TestRecapitulation();
+
+				verificatedResult.setQuestionNumberInRecapitulation(i + 1);
+
+				Integer numberOfSelectedAnswer = Integer.parseInt(mapOfUserAnswers.get(i));
+				verificatedResult.setSelectedAnswerInRecapitulation(numberOfSelectedAnswer);
+
+				String contentOfSelectedAnswer = getContentOfSelectedAnswer(numberOfSelectedAnswer, questionSet);
+				verificatedResult.setSelectedAnswerContentInRecapitulation(contentOfSelectedAnswer);
+
+				if (questionSet.getCorrectAnswer().equals(numberOfSelectedAnswer)) {
+					verificatedResult.setUserSelectionsVerificationResult(true);
+				}
+				userSelectionsVerificationResults.add(verificatedResult);
+			}
+		}
+		return userSelectionsVerificationResults;
 	}
 
 	private List<QuestionSet> getQuestionSetsByTestList(Test selectedTest) {
 		List<QuestionSet> thisList = questionSetRepository.findQuestionSetsByTest(selectedTest);
-//		logger.info(" !!! resultsThatMeetSelectedCriteria enumeration obtained in examServices: " + thisList.toString());
 		return thisList;
 	}
 
@@ -73,6 +95,33 @@ public class ExamServicesImplemented implements ExamServices {
 		options[2] = questionSet.getThirdAnswer();
 		options[3] = questionSet.getFourthAnswer();
 		return options;
+	}
+
+	private String getContentOfSelectedAnswer(Integer numberOfSelectedAnswer, QuestionSet questionSet) {
+
+		String contentOfSelectedAnswer = "";
+
+		switch (numberOfSelectedAnswer) {
+
+		case 1:
+			contentOfSelectedAnswer = questionSet.getFirstAnswer();
+			break;
+
+		case 2:
+			contentOfSelectedAnswer = questionSet.getSecondAnswer();
+			break;
+
+		case 3:
+			contentOfSelectedAnswer = questionSet.getThirdAnswer();
+			break;
+
+		case 4:
+			contentOfSelectedAnswer = questionSet.getFourthAnswer();
+			break;
+
+		}
+
+		return contentOfSelectedAnswer;
 	}
 
 }
