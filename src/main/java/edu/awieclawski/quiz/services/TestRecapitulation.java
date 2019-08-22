@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 public class TestRecapitulation {
 	
 	private Integer questionNumberInRecapitulation;
-	private Integer selectedAnswerInRecapitulation;
+	private String selectedAnswerInRecapitulation;
 	private String selectedAnswerContentInRecapitulation;
 	private Boolean userSelectionsVerificationResult;
 	
 	public TestRecapitulation() {
 		super();
 	}
-	public TestRecapitulation(Integer questionNumberInRecapitulation, Integer selectedAnswerInRecapitulation,
+	public TestRecapitulation(Integer questionNumberInRecapitulation, String selectedAnswerInRecapitulation,
 			String selectedAnswerContentInRecapitulation, Boolean userSelectionsVerificationResult) {
 		super();
 		this.questionNumberInRecapitulation = questionNumberInRecapitulation;
@@ -27,10 +27,10 @@ public class TestRecapitulation {
 	public void setQuestionNumberInRecapitulation(Integer questionNumberInRecapitulation) {
 		this.questionNumberInRecapitulation = questionNumberInRecapitulation;
 	}
-	public Integer getSelectedAnswerInRecapitulation() {
+	public String getSelectedAnswerInRecapitulation() {
 		return selectedAnswerInRecapitulation;
 	}
-	public void setSelectedAnswerInRecapitulation(Integer selectedAnswerInRecapitulation) {
+	public void setSelectedAnswerInRecapitulation(String selectedAnswerInRecapitulation) {
 		this.selectedAnswerInRecapitulation = selectedAnswerInRecapitulation;
 	}
 	public String getSelectedAnswerContentInRecapitulation() {

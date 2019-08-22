@@ -45,6 +45,4 @@
 
 	</table>
 
-	(N/S - not selected)
-
 </div>

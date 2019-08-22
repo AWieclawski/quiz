@@ -65,18 +65,22 @@ public class ExamServicesImplemented implements ExamServices {
 			for (int i = 0; i < thisList.size(); i++) {
 				QuestionSet questionSet = thisList.get(i);
 				TestRecapitulation verificatedResult = new TestRecapitulation();
-
+				verificatedResult.setUserSelectionsVerificationResult(false);
 				verificatedResult.setQuestionNumberInRecapitulation(i + 1);
 
-				Integer numberOfSelectedAnswer = Integer.parseInt(mapOfUserAnswers.get(i));
-				verificatedResult.setSelectedAnswerInRecapitulation(numberOfSelectedAnswer);
+				String stringOfSelectedAnswer = mapOfUserAnswers.get(i);
+//check if answer is the same as the as assigned as a correct
+				if (isNumeric(stringOfSelectedAnswer)) {
+					Integer numberOfSelectedAnswer = Integer.valueOf(stringOfSelectedAnswer);
+					if (questionSet.getCorrectAnswer().equals(numberOfSelectedAnswer)) {
+						verificatedResult.setUserSelectionsVerificationResult(true);
+					}
+				}
+				verificatedResult.setSelectedAnswerInRecapitulation(mapOfUserAnswers.get(i));
 
-				String contentOfSelectedAnswer = getContentOfSelectedAnswer(numberOfSelectedAnswer, questionSet);
+				String contentOfSelectedAnswer = getContentOfSelectedAnswer(stringOfSelectedAnswer, questionSet);
 				verificatedResult.setSelectedAnswerContentInRecapitulation(contentOfSelectedAnswer);
 
-				if (questionSet.getCorrectAnswer().equals(numberOfSelectedAnswer)) {
-					verificatedResult.setUserSelectionsVerificationResult(true);
-				}
 				userSelectionsVerificationResults.add(verificatedResult);
 			}
 		}
@@ -97,25 +101,25 @@ public class ExamServicesImplemented implements ExamServices {
 		return options;
 	}
 
-	private String getContentOfSelectedAnswer(Integer numberOfSelectedAnswer, QuestionSet questionSet) {
+	private String getContentOfSelectedAnswer(String numberOfSelectedAnswer, QuestionSet questionSet) {
 
 		String contentOfSelectedAnswer = "";
 
 		switch (numberOfSelectedAnswer) {
 
-		case 1:
+		case "1":
 			contentOfSelectedAnswer = questionSet.getFirstAnswer();
 			break;
 
-		case 2:
+		case "2":
 			contentOfSelectedAnswer = questionSet.getSecondAnswer();
 			break;
 
-		case 3:
+		case "3":
 			contentOfSelectedAnswer = questionSet.getThirdAnswer();
 			break;
 
-		case 4:
+		case "4":
 			contentOfSelectedAnswer = questionSet.getFourthAnswer();
 			break;
 
@@ -124,4 +128,12 @@ public class ExamServicesImplemented implements ExamServices {
 		return contentOfSelectedAnswer;
 	}
 
+	private boolean isNumeric(String strNum) {
+		try {
+			Integer i = Integer.valueOf(strNum);
+		} catch (NumberFormatException | NullPointerException nfe) {
+			return false;
+		}
+		return true;
+	}
 }
