@@ -60,7 +60,7 @@
 
 		<div id="finish">
 			<button type="submit" name="action" value="finishExam">Finish
-				exam</button>
+				exam and get results</button>
 		</div>
 
 	</form>

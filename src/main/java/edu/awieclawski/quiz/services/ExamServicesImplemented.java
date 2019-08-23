@@ -33,23 +33,19 @@ public class ExamServicesImplemented implements ExamServices {
 
 	@Override
 	public List<QuestionSetProxy> questionSetProxyListSetup(Test selectedTest) {
-
 		// getQuestionSetsByTestList from data source
 		List<QuestionSet> thisList = getQuestionSetsByTestList(selectedTest);
 		List<QuestionSetProxy> questionSetProxyList = new ArrayList<>();
 
 		if (!thisList.isEmpty()) {
-
 			int orderNumberOfQuestion = 0;
 			int numberOfAnswers = 4;
-
 			for (int i = 0; i < thisList.size(); i++) {
 				QuestionSet questionSet = thisList.get(i);
 				String[] options = getArrayOfAnswersFromQuestionSet(numberOfAnswers, questionSet);
 				orderNumberOfQuestion = i + 1;
 				QuestionSetProxy questionSetProxy = new QuestionSetProxy(orderNumberOfQuestion,
 						questionSet.getQuestion(), options);
-
 				questionSetProxyList.add(questionSetProxy);
 			}
 		}
@@ -67,9 +63,8 @@ public class ExamServicesImplemented implements ExamServices {
 				TestRecapitulation verificatedResult = new TestRecapitulation();
 				verificatedResult.setUserSelectionsVerificationResult(false);
 				verificatedResult.setQuestionNumberInRecapitulation(i + 1);
-
 				String stringOfSelectedAnswer = mapOfUserAnswers.get(i);
-//check if answer is the same as the as assigned as a correct
+//check if answer is the same as the assigned as the correct one
 				if (isNumeric(stringOfSelectedAnswer)) {
 					Integer numberOfSelectedAnswer = Integer.valueOf(stringOfSelectedAnswer);
 					if (questionSet.getCorrectAnswer().equals(numberOfSelectedAnswer)) {
@@ -77,14 +72,25 @@ public class ExamServicesImplemented implements ExamServices {
 					}
 				}
 				verificatedResult.setSelectedAnswerInRecapitulation(mapOfUserAnswers.get(i));
-
 				String contentOfSelectedAnswer = getContentOfSelectedAnswer(stringOfSelectedAnswer, questionSet);
 				verificatedResult.setSelectedAnswerContentInRecapitulation(contentOfSelectedAnswer);
-
 				userSelectionsVerificationResults.add(verificatedResult);
 			}
 		}
 		return userSelectionsVerificationResults;
+	}
+
+	@Override
+	public int userSelectionsCorrectAnswersCount(List<TestRecapitulation> userSelectionsVerificationResults) {
+		int correctAnswersCount = 0;
+		if (!userSelectionsVerificationResults.isEmpty()) {
+			for (TestRecapitulation result : userSelectionsVerificationResults) {
+				if (result.getUserSelectionsVerificationResult()) {
+					correctAnswersCount++;
+				}
+			}
+		}
+		return correctAnswersCount;
 	}
 
 	private List<QuestionSet> getQuestionSetsByTestList(Test selectedTest) {
@@ -102,9 +108,7 @@ public class ExamServicesImplemented implements ExamServices {
 	}
 
 	private String getContentOfSelectedAnswer(String numberOfSelectedAnswer, QuestionSet questionSet) {
-
 		String contentOfSelectedAnswer = "";
-
 		switch (numberOfSelectedAnswer) {
 
 		case "1":
@@ -122,9 +126,7 @@ public class ExamServicesImplemented implements ExamServices {
 		case "4":
 			contentOfSelectedAnswer = questionSet.getFourthAnswer();
 			break;
-
 		}
-
 		return contentOfSelectedAnswer;
 	}
 
@@ -136,4 +138,5 @@ public class ExamServicesImplemented implements ExamServices {
 		}
 		return true;
 	}
+
 }

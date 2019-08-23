@@ -14,4 +14,6 @@ public interface ExamServices {
 	public List<TestRecapitulation> userSelectionsMapVerification(Test selectedTest,
 			Map<Integer, String> mapOfUserAnswers);
 
+	public int userSelectionsCorrectAnswersCount(List<TestRecapitulation> userSelectionsVerificationResults);
+
 }

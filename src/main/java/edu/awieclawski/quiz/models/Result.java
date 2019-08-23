@@ -57,4 +57,10 @@ public class Result {
 		this.test = test;
 	}
 
+	@Override
+	public String toString() {
+		return "Result [resultId=" + resultId + ", goodAnswers=" + goodAnswers + ", resultDate=" + resultDate
+				+ ", user=" + user + ", test=" + test + "]";
+	}
+
 }

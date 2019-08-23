@@ -33,7 +33,7 @@
 
 					<td>${thisTestRecapitulation.selectedAnswerInRecapitulation}</td>
 
-					<td>${thisTestRecapitulation.selectedAnswerContentInRecapitulation}</td>
+					<td style="text-align: left">${thisTestRecapitulation.selectedAnswerContentInRecapitulation}</td>
 
 					<td>${thisTestRecapitulation.userSelectionsVerificationResult}</td>
 
@@ -44,5 +44,12 @@
 		</tbody>
 
 	</table>
+
+	<form action="/results/finish" method="post">
+
+		<button type="submit" name="action" value="save">Save results and exit to main menu</button>
+
+	</form>
+
 
 </div>

@@ -22,6 +22,29 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Statuses status;
 
+	public User(Long userId, String userName, String login, String password, Privileges privilege, Statuses status) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.login = login;
+		this.password = password;
+		this.privilege = privilege;
+		this.status = status;
+	}
+	
+	public User(String userName, String login, String password, Privileges privilege, Statuses status) {
+		super();
+		this.userName = userName;
+		this.login = login;
+		this.password = password;
+		this.privilege = privilege;
+		this.status = status;
+	}
+
+	public User() {
+		super();
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -69,5 +92,15 @@ public class User {
 	public void setStatus(Statuses status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", login=" + login 
+//				+ ", password=" + password
+				+ ", password=" + "not allowed"
+				+ ", privilege=" + privilege + ", status=" + status + "]";
+	}
+	
+	
 
 }

@@ -46,15 +46,12 @@ public class QuestionSetController {
 	@GetMapping(path = "/exam")
 	public String presentQuestionSets(@ModelAttribute("errorMessage") String errorMessageReceived,
 			@ModelAttribute("infoMessage") String infoMessageReceived, HttpServletRequest request, ModelMap model) {
-
 		model.addAttribute("errorMessageToDisplay", errorMessageReceived);
 		model.addAttribute("infoMessageToDisplay", infoMessageReceived);
 		HttpSession session = request.getSession(false);
-
 		Test selectedTest = (Test) session.getAttribute("sessionTest");
 		Integer currentQuestion = (Integer) session.getAttribute("currentQuestion");
 		QuestionSetProxy thisTestQuestionSetProxy = (QuestionSetProxy) session.getAttribute("thisTestQuestionSet");
-
 		@SuppressWarnings("unchecked")
 		Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session.getAttribute("thisTestSelectionsMap");
 		Integer totalNumberOfQuestions = (Integer) session.getAttribute("thisTestTotalNumberOfQuestions");
@@ -66,7 +63,6 @@ public class QuestionSetController {
 		}
 
 		if (selectedTest != null) {
-
 			List<QuestionSetProxy> thisTestQuestionSetsProxyList = examServices.questionSetProxyListSetup(selectedTest);
 
 			if (thisTestQuestionSetsProxyList.size() > 0) {
@@ -99,7 +95,6 @@ public class QuestionSetController {
 			model.addAttribute("resultsName", resultsName);
 			model.addAttribute("resultName", resultName);
 		}
-
 		return "/quiz/exampresentation";
 	}
 
@@ -108,15 +103,12 @@ public class QuestionSetController {
 			@ModelAttribute("infoMessage") String infoMessage, ModelMap model, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession(false);
-
 		Test selectedTest = (Test) session.getAttribute("sessionTest");
 		Integer currentQuestion = (Integer) session.getAttribute("currentQuestion");
 		QuestionSetProxy thisTestQuestionSetProxy = (QuestionSetProxy) session.getAttribute("thisTestQuestionSet");
-
 		@SuppressWarnings("unchecked")
 		List<QuestionSetProxy> thisTestQuestionSetsProxyList = (List<QuestionSetProxy>) session
 				.getAttribute("thisTestQuestionSetList");
-
 		@SuppressWarnings("unchecked")
 		Map<Integer, String> mapOfUserAnswers = (Map<Integer, String>) session.getAttribute("thisTestSelectionsMap");
 
@@ -125,17 +117,11 @@ public class QuestionSetController {
 			String action = request.getParameter("action");
 			String radio = request.getParameter("submittedAnswer_Id");
 			String selectedRadio = "N/S";
-			// TODO replace quizUserId value by session attribute after login functionality
-			// added
-			String quizUserId = "testUserId";
-
 			int numberOfRadioSamples = thisTestQuestionSetProxy.getArrayOfAnswers().length;
 
 			if (radio != null) {
 				selectedRadio = radioTest(radio, numberOfRadioSamples);
 				mapOfUserAnswers.replace(currentQuestion.intValue() - 1, selectedRadio);
-				logger.info(" === User id: " + quizUserId + " selected answer: " + selectedRadio + " in question no: "
-						+ currentQuestion);
 			}
 
 			if ("next".equals(action)) {
@@ -144,11 +130,9 @@ public class QuestionSetController {
 				currentQuestion--;
 			} else if ("finishExam".equals(action)) {
 				return "redirect:/results/finish";
-
 			}
 
 			session.setAttribute("currentQuestion", currentQuestion);
-
 			thisTestQuestionSetProxy = thisTestQuestionSetsProxyList.get(currentQuestion - 1);
 			session.setAttribute("thisTestQuestionSet", thisTestQuestionSetProxy);
 			session.setAttribute("thisTestSelectionsMap", mapOfUserAnswers);
